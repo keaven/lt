@@ -33,6 +33,16 @@ assert('a "select" with a `selected` value seeds that filter on load', {
   (lti_rows(x) %==% c('Nausea', 'Itch'))
 })
 
+assert('a header funnel inherits its column alignment', {
+  # a numeric column is right-aligned; its filter cell (holding the funnel) must
+  # carry the same al-r class so the funnel sits under the header text
+  x = lt(tdf()) |> lt_interactive(
+    filter = list(n = 'range', grp = 'select'), pager = FALSE)
+  # cells: name (no filter, left), n (range, right), grp (select, left)
+  (lti_eval(x, '[...t.querySelectorAll(".lti-filters td")].map(d => d.className).join("|")')
+   %==% '|al-r|')
+})
+
 assert('el._lt.view() reports the rows a typed filter keeps', {
   # a download-what-is-shown button reads the current view; typed filters live in
   # state.filters (not external predicates), so view() must reflect them
