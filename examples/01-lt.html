@@ -179,7 +179,7 @@ lt(d, auto_format = FALSE) |&gt;
   # lt_note(): the footer note names itself and lt_export()
   lt_note(&quot;lt_note() — and lt_export() saves this table to HTML/PDF/PNG.&quot;)
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/css/lt.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/css/lt.min.css">
 <style>.lt-table {
   .highlight { font-weight: bold; color: #c60; }
 }</style>
@@ -312,7 +312,7 @@ lt(d, auto_format = FALSE) |&gt;
   ]
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/js/lt.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/js/lt.min.js" defer></script>
 <h2 id="sec:basics"><span class="section-number main-number">2</span> Basics</h2>
 <h3 id="sec:a-simple-table"><span class="section-number">2.1</span> A simple table</h3>
 <p>Pass any data frame to <code>lt()</code>:</p>
@@ -1454,7 +1454,7 @@ each cell.</p>
 lt(d_eff) |&gt;
   lt_errorbar(Est ~ Lo + Hi, ref = 0, axis = &quot;Effect (95% CI)&quot;)
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/css/lt-plot.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/css/lt-plot.min.css">
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
   "data": {
@@ -1484,7 +1484,7 @@ lt(d_eff) |&gt;
   ]
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/js/lt-plot.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/js/lt-plot.min.js" defer></script>
 <p>By default the plot is drawn into the first value column’s cells. Pass <code>into</code>
 to draw it into a dedicated column instead, so every value column stays visible
 as text alongside the plot. The named column is created when it does not exist;
@@ -2105,7 +2105,7 @@ first of which is used initially.</p>
 <pre><code class="language-r">d = mtcars[, c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;hp&quot;, &quot;wt&quot;, &quot;gear&quot;)]
 lt(d) |&gt; lt_interactive(pager = c(5, 10, Inf))
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/css/lt-interactive.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/css/lt-interactive.min.css">
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
   "data": {
@@ -2122,7 +2122,7 @@ lt(d) |&gt; lt_interactive(pager = c(5, 10, Inf))
   }
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.105/js/lt-interactive.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.106/js/lt-interactive.min.js" defer></script>
 <p>Shift-click a second header to sort by it as a tie-breaker, so several
 columns sort at once (an ordinal in each header marks its place). An
 initial sort can be requested with <code>sort</code> as a one-sided formula (below);
