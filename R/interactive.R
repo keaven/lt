@@ -47,6 +47,8 @@
 #'   entry in the list
 #'   is the default applied to every other visible column, so
 #'   `list(TRUE, cyl = "select")` boxes every column but gives `cyl` a dropdown.
+#'   A column with nothing to filter (every value blank) gets no box, even under
+#'   that default.
 #'   A typed filter renders as a funnel + popover (holding the widget *and* an
 #'   expression box, kept in sync) under its column header, or — when the column
 #'   is hidden from the table (e.g. with [lt_hide()]) — as a chip in the control

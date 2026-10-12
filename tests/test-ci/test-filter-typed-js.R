@@ -191,6 +191,30 @@ assert('LT.ui exposes the reusable popover, checklist, and chip builders', {
    %==% '2|a')
 })
 
+assert('a column that starts hidden under the show/hide menu keeps its header funnel', {
+  # grp starts hidden under the eye menu: its under-header funnel is built but
+  # hidden with the column, and reappears under the header when the column is shown
+  # (no chip -- a menu-hidden column is still a table column, not a bar one)
+  x = lt(tdf()) |> lt_interactive(
+    filter = list(grp = 'select'), hide = 'grp', search = FALSE, pager = FALSE)
+  (lti_eval(x, 't.querySelectorAll(".lti-chip").length') %==% '0')
+  (lti_eval(x, 't.querySelector(".lti-filters .lti-funnel").closest("td").hidden') %==% 'true')
+  # reveal grp from the eye menu: the header funnel's cell shows
+  show = 't.querySelector(".lti-cols button").click();
+    [...t.querySelectorAll(".lti-menu label")].find(l => l.textContent.trim() === "grp")
+      .querySelector("input").click()'
+  (lti_eval(x, 't.querySelector(".lti-filters .lti-funnel").closest("td").hidden', show)
+   %==% 'false')
+})
+
+assert('a column with nothing to filter gets no box, even under a blanket default', {
+  # an all-blank column (e.g. a plot-only target) has nothing to match, so the
+  # unnamed TRUE default skips it; only the populated columns get a box
+  d = data.frame(name = sym, blank = rep('', 4))
+  x = lt(d) |> lt_interactive(filter = TRUE, search = FALSE, pager = FALSE)
+  (lti_eval(x, 't.querySelectorAll(".lti-filters .lti-search").length') %==% '1')
+})
+
 assert('a popover flips to the funnel right against the scroll box, not the viewport', {
   x = lt(tdf()) |> lt_interactive(filter = list(grp = 'select'), search = FALSE, pager = FALSE)
   # a narrow scroll box with room to spare in the viewport: a panel that would
