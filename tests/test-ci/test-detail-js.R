@@ -7,25 +7,25 @@ assert("expanding a row reveals its detail, which follows the row", {
   caret = function(i) sprintf('t.querySelectorAll("tbody .lti-expand")[%d].click()', i)
   # one caret per body row, nothing expanded yet
   (lti_eval(x, 't.querySelectorAll("tbody .lti-expand").length') %==% '4')
-  (lti_eval(x, 't.querySelectorAll(".lti-detail").length') %==% '0')
+  (lti_eval(x, 't.querySelectorAll(".lti-detail:not([hidden])").length') %==% '0')
   # expanding the first row inserts a detail row carrying the built table
   open0 = caret(0)
-  (lti_eval(x, 't.querySelectorAll(".lti-detail").length', open0) %==% '1')
-  (lti_eval(x, 't.querySelector(".lti-detail .lt-table td").textContent', open0) %==% 'Rash:5')
-  (lti_eval(x, 't.querySelector(".lti-detail td").colSpan', open0) %==% '2')
+  (lti_eval(x, 't.querySelectorAll(".lti-detail:not([hidden])").length', open0) %==% '1')
+  (lti_eval(x, 't.querySelector(".lti-detail:not([hidden]) .lt-table td").textContent', open0) %==% 'Rash:5')
+  (lti_eval(x, 't.querySelector(".lti-detail:not([hidden]) td").colSpan', open0) %==% '2')
   (lti_eval(x, 't.querySelectorAll(".lti-expand")[0].ariaExpanded', open0) %==% 'true')
-  # collapsing it again removes the detail row
-  (lti_eval(x, 't.querySelectorAll(".lti-detail").length',
+  # collapsing it again hides the detail row (it stays built in the DOM)
+  (lti_eval(x, 't.querySelectorAll(".lti-detail:not([hidden])").length',
             paste(open0, caret(0), sep = ';')) %==% '0')
   # it stays open across a sort (which re-renders <tbody>) and follows its row:
   # after sorting by n ascending, Rash (n = 5) moves, and its detail trails it
   srt = paste(open0,
     'document.querySelectorAll("thead th .lti-label")[1].click()',
     sep = ';')
-  (lti_eval(x, 't.querySelectorAll(".lti-detail").length', srt) %==% '1')
+  (lti_eval(x, 't.querySelectorAll(".lti-detail:not([hidden])").length', srt) %==% '1')
   (lti_eval(
     x,
-    't.querySelector(".lti-detail").previousElementSibling.cells[0].textContent.includes("Rash")',
+    't.querySelector(".lti-detail:not([hidden])").previousElementSibling.cells[0].textContent.includes("Rash")',
     srt
   ) %==% 'true')
 })
@@ -39,9 +39,9 @@ assert("expanding or collapsing a row on the same page does not rebuild <tbody>"
   js = paste('window.PIN = t.querySelectorAll("tbody tr")[1]',
              caret(0), caret(0), sep = ';')
   (lti_eval(x, 'window.PIN.isConnected', js) %==% 'true')
-  # expanding alone keeps the sibling connected and inserts exactly one detail row
+  # expanding alone keeps the sibling connected and shows exactly one detail row
   js1 = paste('window.PIN = t.querySelectorAll("tbody tr")[1]', caret(0), sep = ';')
-  (lti_eval(x, 'window.PIN.isConnected + "," + t.querySelectorAll(".lti-detail").length', js1)
+  (lti_eval(x, 'window.PIN.isConnected + "," + t.querySelectorAll(".lti-detail:not([hidden])").length', js1)
    %==% 'true,1')
 })
 
@@ -58,7 +58,7 @@ assert("row detail takes an inline js() callback and sees hidden columns", {
   # expanding the first row builds its detail straight from the callback,
   # surfacing the hidden value
   open0 = 't.querySelectorAll("tbody .lti-expand")[0].click()'
-  (lti_eval(x, 't.querySelector(".lti-detail .lt-table td").textContent', open0)
+  (lti_eval(x, 't.querySelector(".lti-detail:not([hidden]) .lt-table td").textContent', open0)
    %==% 'p')
 })
 
@@ -73,9 +73,9 @@ assert("detail = column names builds a one-row table of displayed values", {
     lt_interactive(detail = ~ n + secret)
   open0 = 't.querySelectorAll("tbody .lti-expand")[0].click()'
   # the named columns become headers, their displayed values a single row
-  (lti_eval(x, '[...t.querySelectorAll(".lti-detail .lt-table th")].map(c => c.textContent).join("|")', open0)
+  (lti_eval(x, '[...t.querySelectorAll(".lti-detail:not([hidden]) .lt-table th")].map(c => c.textContent).join("|")', open0)
    %==% 'n|secret')
-  (lti_eval(x, '[...t.querySelectorAll(".lti-detail .lt-table tbody td")].map(c => c.textContent).join("|")', open0)
+  (lti_eval(x, '[...t.querySelectorAll(".lti-detail:not([hidden]) .lt-table tbody td")].map(c => c.textContent).join("|")', open0)
    %==% '5.0|p')
 })
 
@@ -84,7 +84,7 @@ assert("el._lt.resetDetail rebuilds an open detail from its callback", {
   # forestly's "hide placebo" funnel); the detail is memoized per row at first
   # expand, so a caller must bust it to pick up the new flag
   x = itbl(detail = js('(row) => ({ data: { d: [window.HIDE ? "H" : row.name] } })'))
-  cell = 't.querySelector(".lti-detail .lt-table td").textContent'
+  cell = 't.querySelector(".lti-detail:not([hidden]) .lt-table td").textContent'
   caret = 't.querySelectorAll("tbody .lti-expand")[0].click()'
   (lti_eval(x, cell, caret) %==% 'Rash')
   # closing, flipping the flag, and reopening alone shows the stale cached value
@@ -104,6 +104,31 @@ assert("a detail table is itself interactive when its spec opts in", {
   x = itbl(detail = js(
     '(row) => ({ data: { k: ["x", "y"], v: [2, 1] }, interactive: { sort: true } })'))
   open0 = 't.querySelectorAll("tbody .lti-expand")[0].click()'
-  (lti_eval(x, 't.querySelectorAll(".lti-detail .lt-table .lti-sortable").length', open0)
+  (lti_eval(x, 't.querySelectorAll(".lti-detail:not([hidden]) .lt-table .lti-sortable").length', open0)
    %==% '2')
+})
+
+assert("the table pre-sizes to its widest detail so expanding does not jump", {
+  # a detail far wider than the host table: at idle lt opens each current-page
+  # detail, measures how wide it makes the table, and sets the table's `width`
+  # to the widest -- so a later expand changes nothing. Pre-sizing is async
+  # (idle, one row per slice), so drive the browser directly and poll for it.
+  x = itbl(detail = js('(row) => ({ data: Object.fromEntries(
+    Array.from({length: 30}, (_, i) => ["c" + i, ["cell_" + i + "_" + row.name]])) })'))
+  f = tempfile(fileext = '.html'); on.exit(unlink(f), add = TRUE)
+  xfun::write_utf8(format(x, fragment = FALSE), f)
+  b = lti_session()
+  b$Page$navigate(paste0('file://', normalizePath(f)), wait_ = FALSE)
+  ev = function(e) tryCatch(b$Runtime$evaluate(e)$result$value, error = function(.) NULL)
+  # poll until pre-size has set an explicit width (sized via `width`, not min-width)
+  w = ''
+  for (i in 1:2000) { w = ev('(document.querySelector(".lt-table")||{style:{}}).style.width || ""')
+    if (nzchar(w)) break; Sys.sleep(0.005) }
+  (nzchar(w) %==% TRUE)
+  (ev('(document.querySelector(".lt-table").style.minWidth || "") === ""') %==% TRUE)
+  # expanding the first row does not change the (already pre-sized) table width
+  before = ev('Math.round(document.querySelector(".lt-table").getBoundingClientRect().width)')
+  ev('t = document.querySelector(".lt-table"); t.querySelectorAll("tbody .lti-expand")[0].click()')
+  after = ev('Math.round(document.querySelector(".lt-table").getBoundingClientRect().width)')
+  (abs(before - after) <= 1)
 })

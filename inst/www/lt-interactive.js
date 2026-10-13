@@ -699,42 +699,65 @@
       btn.textContent = open ? "▾" : "▸";
       btn.setAttribute("aria-expanded", String(open));
     };
-    // insert a row's detail after its <tr> (spec built once, cached); none if the
-    // callback yields none
+    // build a row's detail once, inserted hidden after its <tr>; the row stays in
+    // the DOM and the caret toggles visibility. null if the callback yields none.
     const openDetail = (tr, r) => {
       const child = build(r);
-      if (!child) return;
-      const row = elem(doc, "tr", { className: "lti-detail" });
+      if (!child) return null;
+      const row = elem(doc, "tr", { className: "lti-detail", hidden: true });
       tr.after(row);
       LT.render(elem(doc, "div", {}, elem(doc, "td", { colSpan: nCol }, row)), child);
+      return row;
     };
-    // toggle one row in place, no <tbody> rebuild: collapse drops its detail row,
-    // expand builds+inserts it (behind the busy state). A page/sort/filter rebuild
-    // restores open rows' details via decorate.
+    const ensureDetail = (tr, r) => {
+      const d = tr.nextElementSibling;
+      return d?.classList.contains("lti-detail") ? d : openDetail(tr, r);
+    };
+    // toggle one row in place: just flip the (already built) detail's visibility.
     const toggle = (tr, btn, r) => {
       const open = state.expanded.has(r);
       open ? state.expanded.delete(r) : state.expanded.add(r);
       setCaret(btn, !open);
-      if (open) {
-        const d = tr.nextElementSibling;
-        if (d?.classList.contains("lti-detail")) d.remove();
-      } else busy(() => openDetail(tr, r));
+      const d = ensureDetail(tr, r);
+      if (d) d.hidden = open;   // was open -> hide; was closed -> show
     };
-    const decorate = (body, rows) => [...body.rows].forEach((tr, i) => {
-      const r = rows[i];
-      if (typeof r !== "number") return;  // a separator group-header row
-      // the first data cell (past any leading rowspan group cell), so the caret
-      // sits in the row's own first column, not a group label
-      const td0 = dataCells(tr)[0], open = state.expanded.has(r);
-      if (!td0) return;
-      const btn = elem(doc, "button", {
-        type: "button", className: "lti-expand", "aria-label": "Toggle detail"
+    // Pre-size the table to its widest current-page detail so expanding never
+    // jumps the width. At idle: open each detail to measure, re-hide it, and set
+    // `width` (not min-width, so the wrap's max-width still caps it) to the widest
+    // when it beats the intrinsic width. Also warms every expand to an instant
+    // show/hide. Re-run per <tbody> render, so the width tracks the page.
+    const win = doc.defaultView, idle = win.requestIdleCallback || win.setTimeout;
+    const presize = (body) => idle(() => {
+      if (!body.isConnected) return;                   // a newer render replaced it
+      el.style.width = "";
+      const intrinsic = el.getBoundingClientRect().width;
+      let max = intrinsic;
+      body.querySelectorAll(".lti-expand").forEach(c => {
+        if (c.getAttribute("aria-expanded") === "true") return;  // already shown
+        c.click();                                     // build + show
+        max = Math.max(max, el.getBoundingClientRect().width);
+        c.click();                                     // hide (stays built)
       });
-      setCaret(btn, open);
-      btn.onclick = () => toggle(tr, btn, r);
-      td0.prepend(btn);
-      if (open) openDetail(tr, r);
+      if (max > intrinsic) el.style.width = Math.ceil(max) + "px";
     });
+    const decorate = (body, rows) => {
+      [...body.rows].forEach((tr, i) => {
+        const r = rows[i];
+        if (typeof r !== "number") return;  // a separator group-header row
+        // the first data cell (past any leading rowspan group cell), so the caret
+        // sits in the row's own first column, not a group label
+        const td0 = dataCells(tr)[0], open = state.expanded.has(r);
+        if (!td0) return;
+        const btn = elem(doc, "button", {
+          type: "button", className: "lti-expand", "aria-label": "Toggle detail"
+        });
+        setCaret(btn, open);
+        btn.onclick = () => toggle(tr, btn, r);
+        td0.prepend(btn);
+        if (open) { const d = ensureDetail(tr, r); if (d) d.hidden = false; }
+      });
+      presize(body);
+    };
     // drop a row's cached detail (or every row's) and re-render, so the callback
     // re-runs and the detail — and its own sort/filter state — rebuilds fresh,
     // e.g. after a caller's widget changes what the callback returns.
