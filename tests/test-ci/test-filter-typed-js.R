@@ -217,6 +217,36 @@ assert('a column that starts hidden under the show/hide menu keeps its header fu
    %==% 'false')
 })
 
+assert('box = FALSE drops the expression box, leaving only the widget', {
+  x = lt(tdf()) |> lt_interactive(
+    filter = list(grp = list(type = 'select', box = FALSE)), pager = FALSE)
+  # the popover holds the dropdown but no free-text expression box
+  (lti_eval(x, 't.querySelectorAll(".lti-filters .lti-pop select").length') %==% '1')
+  (lti_eval(x, 't.querySelectorAll(".lti-filters .lti-pop .lti-search").length') %==% '0')
+  # the dropdown still filters
+  pick = 'var s = t.querySelector(".lti-filters select"); s.value = "b"; s.onchange()'
+  (lti_rows(x, pick) %==% c('Nausea', 'Itch'))
+})
+
+assert('the widget hides when a hand-typed expression outruns it', {
+  x = lt(tdf()) |> lt_interactive(filter = list(n = 'range'), pager = FALSE)
+  # read the widget's own display, not its `hidden` attribute: the widget sets
+  # an explicit display, so the attribute alone would not take it out of the
+  # layout -- the display is what the reader actually sees
+  disp = 'getComputedStyle(t.querySelector(".lti-widget")).display'
+  # a representable range keeps the slider shown
+  rng = 'var b = t.querySelector(".lti-filters .lti-pop input"); b.value = "x >= 4 && x <= 9"; b.onchange()'
+  (lti_eval(x, disp, rng) %==% 'contents')
+  # an expression the two-thumb slider can't represent hides the widget, so it
+  # never shows a range out of step with the box
+  custom = 'var b = t.querySelector(".lti-filters .lti-pop input"); b.value = "x == 5 || x == 12"; b.onchange()'
+  (lti_eval(x, disp, custom) %==% 'none')
+  (lti_rows(x, custom) %==% c('Rash', 'Nausea'))
+  # clearing the box brings the slider back
+  clear = paste(custom, 'b.value = ""; b.onchange()', sep = ';')
+  (lti_eval(x, disp, clear) %==% 'contents')
+})
+
 assert('a column with nothing to filter gets no box, even under a blanket default', {
   # an all-blank column (e.g. a plot-only target) has nothing to match, so the
   # unnamed TRUE default skips it; only the populated columns get a box

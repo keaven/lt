@@ -52,7 +52,12 @@
 #'   A typed filter renders as a funnel + popover (holding the widget *and* an
 #'   expression box, kept in sync) under its column header, or — when the column
 #'   is hidden from the table (e.g. with [lt_hide()]) — as a chip in the control
-#'   bar, a natural way to offer a control for a value you don't show.
+#'   bar, a natural way to offer a control for a value you don't show. Add `box =
+#'   FALSE` to a typed spec's list to drop the expression box, restricting the
+#'   column to the widget's own choices (e.g. a single-select dropdown with no
+#'   custom set). The widget hides itself whenever a hand-typed expression
+#'   outruns it (a value it cannot represent), so it never shows a value out of
+#'   step with the box.
 #' @param pager The page sizes to offer, as a vector of row counts; the
 #'   first one is used initially. Paging shows that many of the filtered and
 #'   sorted rows at a time, with a pager (first, previous, next, last), the row

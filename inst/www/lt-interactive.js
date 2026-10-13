@@ -1176,7 +1176,9 @@
 
   // One bundle per filter type, so adding a type is a single entry rather than a
   // branch in each of describe/build/init. `describe(term, cfg)` is the chip's
-  // one-line summary; `init(cfg)` is the term for the configured default; and
+  // one-line summary; `init(cfg)` is the term for the configured default;
+  // `parse(term)` reads the term back to a widget value, or null when it is a
+  // hand-typed expression the widget can't show (so the widget hides); and
   // `build(doc, cfg, setTerm)` makes the widget as a syncing editor `{ el,
   // reflect(term) }`, where `el` (a node or array of nodes) goes in the popover
   // and the widget's own input writes the term through `setTerm`. The term <->
@@ -1190,6 +1192,7 @@
         return o ? o.label : v;
       },
       init: cfg => selExpr(cfg.selected ?? ""),
+      parse: selParse,
       build: (doc, cfg, setTerm) => {
         const w = makeSelect(doc, cfg.choices, v => setTerm(selExpr(v), ed)),
               ed = { el: w.el, reflect: t => { const v = selParse(t); w.set(v == null ? "" : v); } };
@@ -1199,6 +1202,7 @@
     range: {
       describe: t => { const p = rngParse(t); return p ? `${p[0]} – ${p[1]}` : t ? "⋯" : ""; },
       init: cfg => cfg.value ? rngExpr(cfg.value[0], cfg.value[1], cfg.min, cfg.max) : "",
+      parse: rngParse,
       build: (doc, cfg, setTerm) => {
         const out = elem(doc, "span", { className: "lti-slider-out" }),
               show = p => out.textContent = `${p[0]} – ${p[1]}`,
@@ -1218,6 +1222,7 @@
       },
       // `[].concat` so a single `selected` value (a scalar from R) still seeds
       init: cfg => setExpr([].concat(cfg.selected ?? cfg.choices.map(o => o.value)), cfg.choices),
+      parse: setParse,
       build: (doc, cfg, setTerm) => {
         const all = cfg.choices.map(o => o.value),
               w = makeChecklist(doc, cfg.choices, sel => setTerm(setExpr(sel, cfg.choices), ed)),
@@ -1236,14 +1241,18 @@
           kind = KINDS[cfg.type],
           editors = [];       // the expression box + widget, kept in sync
     let mark = () => {},       // paints the active state once `root` exists (below)
-        showSummary = () => {};  // updates the chip's value readout (chip only)
+        showSummary = () => {},  // updates the chip's value readout (chip only)
+        widget = null;         // the widget's wrapper, hidden when it can't fit the term
     // set the one term, re-render, and reflect it into every editor but the one
-    // that caused the change (`from`), so the slider and box update each other
+    // that caused the change (`from`), so the slider and box update each other.
+    // The widget hides when the term outruns it (a hand-typed expression it can't
+    // show), so it never displays a value out of step with the box.
     const setTerm = (expr, from) => {
       expr ? (state.filters[col] = expr) : delete state.filters[col];
       refresh();
       const cur = state.filters[col] || "";
       editors.forEach(e => e !== from && e.reflect(cur));
+      if (widget) widget.hidden = !!cur && kind.parse(cur) == null;
       mark(cur);
     };
     // a hidden column wraps the funnel in a labelled chip (via makeChip), which
@@ -1252,16 +1261,21 @@
     // popover.
     const chip = chipLabel && makeChip(doc, chipLabel);
     const wrap = popover(doc, `Filter ${cfg.label || col}`, panel => {
-      const box = elem(doc, "input", {
-        type: "search", className: "lti-search",
-        "aria-label": `${cfg.label || col} filter expression`
-      }, panel);
-      const boxEd = { reflect: v => { if (doc.activeElement !== box) box.value = v; } };
-      editors.push(boxEd);
-      onType(box, v => setTerm(v.trim(), boxEd));
+      // `box = FALSE` drops the free-text expression box, restricting the column
+      // to the widget's own choices (e.g. a single-select dropdown, no custom set)
+      if (cfg.box !== false) {
+        const box = elem(doc, "input", {
+          type: "search", className: "lti-search",
+          "aria-label": `${cfg.label || col} filter expression`
+        }, panel);
+        const boxEd = { reflect: v => { if (doc.activeElement !== box) box.value = v; } };
+        editors.push(boxEd);
+        onType(box, v => setTerm(v.trim(), boxEd));
+      }
       const wEd = kind.build(doc, cfg, setTerm);  // the widget as a syncing editor
       editors.push(wEd);
-      panel.append(...[].concat(wEd.el));
+      widget = elem(doc, "div", { className: "lti-widget" }, panel);
+      widget.append(...[].concat(wEd.el));
       setTerm(kind.init(cfg), null);              // seed the configured default
     }, () => showSummary(), chip && chip.el);      // refresh the chip text on close
     // the active-state class tracks every change, but the chip's value text is

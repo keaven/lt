@@ -211,14 +211,14 @@
       left: 0;
       display: flex;
       flex-direction: column;
-      /* an explicit display beats the UA [hidden] rule, so re-hide it here */
-      &[hidden] { display: none; }
       gap: 0.5em;
       min-width: 14em;
       max-width: 90vw;
       padding: 0.6em;
       background: Canvas;
       border: 1px solid;
+      .lti-widget { display: contents; }
+      &[hidden], [hidden] { display: none; }
       /* a checklist widget's rows: a checkbox beside its label */
       .lti-check {
         display: flex;
