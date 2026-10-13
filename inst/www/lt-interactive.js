@@ -1200,7 +1200,11 @@
     // click inside the open panel must not toggle it shut
     const anchor = host || wrap;
     anchor.onclick = e => { if (!panel.contains(e.target)) open(panel.hidden); };
-    on(doc, "click", e => { if (!anchor.contains(e.target)) open(false); });
+    // close on an outside press, not click: using a widget re-renders the table,
+    // so a press inside and release can land on different elements, firing a stray
+    // click on their ancestor outside the panel (as a native <select> pick does).
+    // The press is always inside, so a pointerdown guard spares it.
+    on(doc, "pointerdown", e => { if (!anchor.contains(e.target)) open(false); });
     on(doc, "keydown", e => { if (e.key === "Escape") open(false); });
     return wrap;
   }

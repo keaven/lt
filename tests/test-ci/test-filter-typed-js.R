@@ -80,6 +80,17 @@ assert('a chip opens its popover on a click anywhere, aligned to the chip left e
   # a click inside the open panel leaves it open
   stay = paste(open, 't.querySelector(".lti-pop-panel").click()', sep = ';')
   (lti_eval(x, '!t.querySelector(".lti-pop-panel").hidden', stay) %==% 'true')
+  # a stray outside click with no preceding pointerdown (as a widget re-render or
+  # a native <select> pick fires) must not shut the panel
+  phantom = paste(open,
+    't.closest(".lt-wrap").dispatchEvent(new MouseEvent("click", { bubbles: true }))',
+    sep = ';')
+  (lti_eval(x, '!t.querySelector(".lti-pop-panel").hidden', phantom) %==% 'true')
+  # a genuine press outside still closes it
+  away = paste(open,
+    't.closest(".lt-wrap").dispatchEvent(new MouseEvent("pointerdown", { bubbles: true }))',
+    sep = ';')
+  (lti_eval(x, 't.querySelector(".lti-pop-panel").hidden', away) %==% 'true')
 })
 
 assert('an unnamed default entry boxes the other columns alongside a typed column', {
