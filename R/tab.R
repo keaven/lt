@@ -586,6 +586,19 @@ plot_colors = function(color, labels, names) {
   list(colors = colors, labels = labels)
 }
 
+# Parse a plot's `width`: a number is a fixed px size; a relative CSS width
+# ("100%", "80%") or `list(min =, width =)` auto-fits the column. Returns `width`
+# (the min / starting px, `default` if unset) and `fit` (the CSS width, or NULL).
+plot_width = function(width, default) {
+  if (is.numeric(width)) return(list(width = width, fit = NULL))
+  if (is.list(width)) {
+    if (is.null(width$width))
+      stop("a list `width` needs a `width`, e.g. list(min = 200, width = '100%').")
+    return(list(width = width$min %||% default, fit = as.character(width$width)))
+  }
+  list(width = default, fit = as.character(width))
+}
+
 # Shared scale for a column plot: the given `limits`, else the range of all the
 # plotted columns' finite values (a degenerate column falls back to [0, 1]).
 plot_limits = function(limits, data, cols) {
@@ -645,8 +658,14 @@ plot_setup = function(x, into, src, shown, hide) {
 #'   column of this name is created when it does not already exist (added as a
 #'   new, extra column -- use [lt_move()] to position it). When `NULL`
 #'   (default), the plot is drawn into the first series' value column.
-#' @param width,height Pixel size of each cell's SVG. `height` defaults to a
-#'   size that fits the number of series (taller for more).
+#' @param width,height Pixel size of each cell's SVG. `width` may instead be a
+#'   relative CSS width such as `"100%"` or `"80%"`, in which case the plot
+#'   auto-fits its column: it takes that fraction of the column's width and is
+#'   redrawn when the width changes (e.g. the window or a column is resized),
+#'   never shrinking below the default pixel width. Use `list(min =, width =)`
+#'   to set that minimum explicitly, e.g. `list(min = 200, width = "100%")`.
+#'   `height` defaults to a size that fits the number of series (taller for
+#'   more).
 #' @param hide If `TRUE` (default), the columns the plot reads are hidden, since
 #'   their values are drawn into it: all but the one holding the plot, or --
 #'   when `into` names a separate target column -- all of them. Set to `FALSE`
@@ -677,6 +696,8 @@ plot_setup = function(x, into, src, shown, hide) {
 #' lt(d) |> lt_errorbar(est ~ lo + hi, hide = FALSE, axis = "Effect")
 #' # draw into a dedicated column, keeping every value column visible as text
 #' lt(d) |> lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE)
+#' # auto-fit the plot to its column (grows/shrinks as the column is resized)
+#' lt(d) |> lt_errorbar(est ~ lo + hi, into = "forest", width = "100%")
 #' # several series stacked in each cell, colored with a footer legend
 #' d2 = data.frame(
 #'   term = c("A", "B"), e1 = c(0.2, 0.4), l1 = c(0, 0.2), u1 = c(0.4, 0.6),
@@ -709,12 +730,14 @@ lt_errorbar = function(
   cl = plot_colors(color, labels, vals)
   # stack more series into a taller cell by default (~9px per series)
   if (is.null(height)) height = if (n > 1) n * 9 + 4 else 16
+  w = plot_width(width, 160)
   x = plot_setup(x, into, all_cols, vals, hide)
   add_op(x, 'errorbar', columns = I(vals), lowers = I(los), uppers = I(his),
     into = into,
     colors = if (!is.null(cl$colors)) I(cl$colors),
     labels = if (!is.null(cl$labels)) I(cl$labels),
-    min = limits[1], max = limits[2], ref = ref, width = width, height = height,
+    min = limits[1], max = limits[2], ref = ref, width = w$width, fit = w$fit,
+    height = height,
     axis = if (isTRUE(axis) || is.character(axis)) TRUE,
     axis_label = if (is.character(axis)) axis)
 }
@@ -739,7 +762,9 @@ lt_errorbar = function(
 #'   rows (so rows are comparable). The default (`NULL`) scales each row to its
 #'   own range.
 #' @param color CSS color for the line or bars (defaults to the stylesheet's).
-#' @param width,height Pixel size of each cell's SVG.
+#' @param width,height Pixel size of each cell's SVG. `width` may instead be a
+#'   relative CSS width (e.g. `"100%"`), or `list(min =, width =)`, to auto-fit
+#'   the column (see [lt_errorbar()]).
 #' @param hide If `TRUE` (default) and the series spans several columns, those
 #'   columns after the first are hidden (their values are drawn into the plot);
 #'   set to `FALSE` to keep them visible. Has no effect for a single
@@ -763,8 +788,10 @@ lt_sparkline = function(
   cols = as.character(f_cols(columns, x$data))
   if (length(cols) < 1) stop('`columns` must name at least one column.')
   if (hide && length(cols) > 1) x = add_op(x, 'hide', columns = I(cols[-1]))
+  w = plot_width(width, 120)
   add_op(x, 'sparkline', columns = I(cols), kind = type, color = color,
-    min = limits[1], max = limits[2], width = width, height = height)
+    min = limits[1], max = limits[2], width = w$width, fit = w$fit,
+    height = height)
 }
 
 #' Draw an inline dot plot in a column
@@ -790,8 +817,10 @@ lt_sparkline = function(
 #'   overlap. The vertical position is only cosmetic separation; the value is
 #'   still read horizontally. The cell is made taller to fit the tracks (unless
 #'   `height` is set). `FALSE` (default) draws all dots on one line.
-#' @param width,height Pixel size of each cell's SVG. `height` defaults to a
-#'   size that fits the tracks when `stagger` is set, else a single line.
+#' @param width,height Pixel size of each cell's SVG. `width` may instead be a
+#'   relative CSS width (e.g. `"100%"`), or `list(min =, width =)`, to auto-fit
+#'   the column (see [lt_errorbar()]). `height` defaults to a size that fits the
+#'   tracks when `stagger` is set, else a single line.
 #' @return `x` with the dot-plot column recorded.
 #' @export
 #' @examples
@@ -820,12 +849,14 @@ lt_dotplot = function(
   # a staggered plot needs a taller cell to spread the tracks out (one ~9px
   # track per column, matching lt_errorbar); un-staggered keeps the single line
   if (is.null(height)) height = if (stagger && n > 1) n * 9 + 4 else 16
+  w = plot_width(width, 160)
   x = plot_setup(x, into, cols, cols, hide)
   add_op(x, 'dotplot', columns = I(cols), into = into,
     colors = if (!is.null(colors)) I(colors),
     labels = if (!is.null(labels)) I(labels),
     stagger = if (isTRUE(stagger)) TRUE,
-    min = limits[1], max = limits[2], width = width, height = height,
+    min = limits[1], max = limits[2], width = w$width, fit = w$fit,
+    height = height,
     axis = if (isTRUE(axis) || is.character(axis)) TRUE,
     axis_label = if (is.character(axis)) axis)
 }

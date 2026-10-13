@@ -184,6 +184,121 @@ assert("lt_dotplot draws one colored dot per column with a footer legend", {
   (lti_eval(xm, 't.querySelectorAll(".lt-plot-legend").length') %==% '0')
 })
 
+assert("a relative width marks plot cells for auto-fitting, fixed does not", {
+  spec = list(
+    data = list(est = c(0.5, 0.2), lo = c(0, 0.1), hi = c(1, 0.3)),
+    ops = list(list(type = "errorbar", columns = I("est"), lowers = I("lo"),
+      uppers = I("hi"), min = 0, max = 1, width = 160, fit = "80%", height = 16))
+  )
+  html = build(spec)
+  # each cell SVG flexes to the given CSS width (--fw) with the px as its floor
+  (count_str(html, '<svg class="lt-eb lt-fit"') %==% 2L)
+  (count_str(html, '--w:160px;--fw:80%') %==% 2L)
+  # a fixed width (no fit) stays a plain plot, no flex class or vars
+  spec$ops[[1]]$fit = NULL
+  (count_str(build(spec), 'lt-fit') %==% 0L)
+})
+
+assert("an auto-fit plot is measured and redrawn to fill its column (browser)", {
+  d = data.frame(term = c("A", "B"), est = c(0.2, 0.4),
+                 lo = c(0, 0.2), hi = c(0.4, 0.6))
+  x = lt(d) |>
+    lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE, width = "100%") |>
+    lt_width(forest = "320px") |> lt_interactive()
+  # the resizer measures the (wide) column and stores the pixel width on the op,
+  # then redraws: the SVG's coordinate `width` is that measured size, not the
+  # 160px floor -- so marks are drawn at the real width, not stretched by CSS
+  got = lti_eval(x, paste0(
+    '[t._ltSpec.ops.find(o=>o.fit)._w,',
+    ' t.querySelector(".lt-eb").getAttribute("width"),',
+    ' Math.round(t.querySelector(".lt-eb").getBoundingClientRect().width)].join(",")'
+  ))
+  v = as.integer(strsplit(got, ",", fixed = TRUE)[[1]])
+  (length(v) %==% 3L)
+  (v[1] > 200)          # measured column width, well past the floor
+  (v[2] %==% v[1])      # coordinate width redrawn to the measured width
+  (v[3] > 200)          # and the SVG actually fills the column
+})
+
+assert("an auto-fit plot tracks a column-only width change (browser)", {
+  d = data.frame(term = c("A", "B"), est = c(0.2, 0.4),
+                 lo = c(0, 0.2), hi = c(0.4, 0.6))
+  x = lt(d) |>
+    lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE, width = "100%") |>
+    lt_width(forest = "320px") |> lt_interactive()
+  # shrink only the plot column (its <col>) -- a change the wrapper never sees,
+  # so an observer on the wrapper would miss it; the header-cell observer must
+  # catch it. Let the observer + redraw settle (two frames), then compare.
+  body_js = paste0(
+    'var op = t._ltSpec.ops.find(o => o.fit), w0 = op._w;',
+    'var ci = t._ltSpec._cols.indexOf("forest");',
+    't.querySelectorAll("colgroup col")[ci].style.width = "200px";',
+    # let the observer fire and its redraw (observer -> rAF -> rebuild) settle
+    'setTimeout(function(){',
+    'document.body.dataset.out = [w0, op._w,',
+    ' t.querySelector(".lt-eb").getAttribute("width")].join(",");',
+    'document.body.dataset.ready = "1";}, 100);'
+  )
+  html = sub('</head>', sprintf(
+    '<script>addEventListener("load", function() {var t = document.querySelector(".lt-table");%s})</script></head>',
+    body_js
+  ), format(x, fragment = FALSE), fixed = TRUE)
+  f = tempfile(fileext = '.html'); on.exit(unlink(f), add = TRUE)
+  xfun::write_utf8(html, f)
+  out = if (xfun::loadable('chromote')) lti_eval_cdp(f) else lti_eval_dump(f)
+  v = as.integer(strsplit(out, ",", fixed = TRUE)[[1]])
+  (v[1] > 250)       # started wide (the 320px column)
+  (v[2] < v[1])      # refit narrower after the column shrank
+  (v[2] < 220 && v[2] > 150)  # tracks the new ~200px column
+  (v[3] %==% v[2])   # redrawn: the SVG's coordinate width matches the refit
+})
+
+assert("a fractional auto-fit width takes that fraction of the column (browser)", {
+  d = data.frame(term = c("A", "B"), est = c(0.2, 0.4),
+                 lo = c(0, 0.2), hi = c(0.4, 0.6))
+  # list(min, width): half the column, with a small minimum so the fraction (not
+  # the floor) governs at this column width
+  x = lt(d) |>
+    lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE,
+                width = list(min = 50, width = "50%")) |>
+    lt_width(forest = "320px") |> lt_interactive()
+  got = lti_eval(x, paste0(
+    '[Math.round(t.querySelector(".lt-eb").getBoundingClientRect().width),',
+    ' Math.round(t._ltHead.forest.getBoundingClientRect().width)].join(",")'
+  ))
+  v = as.integer(strsplit(got, ",", fixed = TRUE)[[1]])
+  # the SVG is ~half the column width (slack for the cell's padding/border)
+  (v[1] > 0.4 * v[2])
+  (v[1] < 0.6 * v[2])
+})
+
+assert("a plot refit keeps the current page, not resetting to the first (browser)", {
+  d = data.frame(term = LETTERS[1:6], est = seq(.1, .6, length.out = 6),
+                 lo = seq(0, .5, length.out = 6), hi = seq(.2, .7, length.out = 6))
+  x = lt(d) |>
+    lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE, width = "100%") |>
+    lt_width(forest = "320px") |> lt_interactive(pager = 3)
+  # page to the second page (rows D, E, F), then refit the plot by shrinking its
+  # column; the refit must re-render in place, keeping the page it was on
+  body_js = paste0(
+    't.querySelector(".lti-pager button[aria-label=\\"Next\\"]").click();',
+    'var ci = t._ltSpec._cols.indexOf("forest");',
+    't.querySelectorAll("colgroup col")[ci].style.width = "200px";',
+    'setTimeout(function(){',
+    'document.body.dataset.out = [...t.querySelectorAll("tbody tr")]',
+    '.map(r => r.children[0].textContent).join("");',
+    'document.body.dataset.ready = "1";}, 120);'
+  )
+  html = sub('</head>', sprintf(
+    '<script>addEventListener("load", function() {var t = document.querySelector(".lt-table");%s})</script></head>',
+    body_js
+  ), format(x, fragment = FALSE), fixed = TRUE)
+  f = tempfile(fileext = '.html'); on.exit(unlink(f), add = TRUE)
+  xfun::write_utf8(html, f)
+  out = if (xfun::loadable('chromote')) lti_eval_cdp(f) else lti_eval_dump(f)
+  (out %==% "DEF")  # still the second page, not reset to "ABC"
+})
+
 assert("lt-plot.js re-renders a table core built before the module loaded", {
   # The litedown/knitr failure mode: an earlier plain table pulls in lt.js, so
   # it loads (and builds this table) before lt-plot.js registers the errorbar

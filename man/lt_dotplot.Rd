@@ -53,8 +53,10 @@ column of this name is created when it does not already exist (added as a
 new, extra column -- use \code{\link[=lt_move]{lt_move()}} to position it). When \code{NULL}
 (default), the plot is drawn into the first series' value column.}
 
-\item{width, height}{Pixel size of each cell's SVG. \code{height} defaults to a
-size that fits the tracks when \code{stagger} is set, else a single line.}
+\item{width, height}{Pixel size of each cell's SVG. \code{width} may instead be a
+relative CSS width (e.g. \code{"100\%"}), or \code{list(min =, width =)}, to auto-fit
+the column (see \code{\link[=lt_errorbar]{lt_errorbar()}}). \code{height} defaults to a size that fits the
+tracks when \code{stagger} is set, else a single line.}
 
 \item{hide}{If \code{TRUE} (default), the columns the plot reads are hidden, since
 their values are drawn into it: all but the one holding the plot, or --

@@ -43,8 +43,14 @@ column of this name is created when it does not already exist (added as a
 new, extra column -- use \code{\link[=lt_move]{lt_move()}} to position it). When \code{NULL}
 (default), the plot is drawn into the first series' value column.}
 
-\item{width, height}{Pixel size of each cell's SVG. \code{height} defaults to a
-size that fits the number of series (taller for more).}
+\item{width, height}{Pixel size of each cell's SVG. \code{width} may instead be a
+relative CSS width such as \code{"100\%"} or \code{"80\%"}, in which case the plot
+auto-fits its column: it takes that fraction of the column's width and is
+redrawn when the width changes (e.g. the window or a column is resized),
+never shrinking below the default pixel width. Use \code{list(min =, width =)}
+to set that minimum explicitly, e.g. \code{list(min = 200, width = "100\%")}.
+\code{height} defaults to a size that fits the number of series (taller for
+more).}
 
 \item{hide}{If \code{TRUE} (default), the columns the plot reads are hidden, since
 their values are drawn into it: all but the one holding the plot, or --
@@ -97,6 +103,8 @@ lt(d) |> lt_errorbar(est ~ lo + hi, ref = 0)
 lt(d) |> lt_errorbar(est ~ lo + hi, hide = FALSE, axis = "Effect")
 # draw into a dedicated column, keeping every value column visible as text
 lt(d) |> lt_errorbar(est ~ lo + hi, into = "forest", hide = FALSE)
+# auto-fit the plot to its column (grows/shrinks as the column is resized)
+lt(d) |> lt_errorbar(est ~ lo + hi, into = "forest", width = "100\%")
 # several series stacked in each cell, colored with a footer legend
 d2 = data.frame(
   term = c("A", "B"), e1 = c(0.2, 0.4), l1 = c(0, 0.2), u1 = c(0.4, 0.6),

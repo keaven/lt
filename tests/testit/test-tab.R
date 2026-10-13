@@ -206,6 +206,31 @@ assert("lt_errorbar() records columns, scale, and reference line", {
   (has_error(lt_errorbar(x, a ~ b)) %==% TRUE)
 })
 
+assert("a relative plot width opts into auto-fit; a number stays fixed", {
+  # a number is a fixed pixel size: `fit` absent, `width` recorded verbatim
+  (op_of(lt_errorbar(x, a ~ b + c, width = 90), "errorbar")$width %==% 90)
+  (is.null(op_of(lt_errorbar(x, a ~ b + c, width = 90), "errorbar")$fit) %==% TRUE)
+  # a relative CSS width records that string as `fit`; `width` falls back to the
+  # default px (the fit floor and starting coordinate size), per plot type
+  eb = op_of(lt_errorbar(x, a ~ b + c, width = "100%"), "errorbar")
+  (eb$fit %==% "100%")
+  (eb$width %==% 160)
+  dp = op_of(lt_dotplot(x, ~ a + b, width = "100%"), "dotplot")
+  (dp$fit %==% "100%")
+  (dp$width %==% 160)
+  sp = op_of(lt_sparkline(x, ~ a + b, width = "50%"), "sparkline")
+  (sp$fit %==% "50%")
+  (sp$width %==% 120)
+  # a list keeps the relative width and sets an explicit minimum (`width`)
+  li = op_of(lt_errorbar(x, a ~ b + c, width = list(min = 200, width = "80%")), "errorbar")
+  (li$fit %==% "80%")
+  (li$width %==% 200)
+  # min defaults to the plot's default when the list omits it
+  (op_of(lt_errorbar(x, a ~ b + c, width = list(width = "100%")), "errorbar")$width %==% 160)
+  # a list without a `width` element is an error
+  (has_error(lt_errorbar(x, a ~ b + c, width = list(min = 200))) %==% TRUE)
+})
+
 assert("lt_dotplot()/lt_errorbar() draw into a dedicated `into` column", {
   # `into` records the target name and an `add_col` op registers the new column;
   # every source column, including the first, is hidden

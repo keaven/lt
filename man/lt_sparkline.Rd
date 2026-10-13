@@ -32,7 +32,9 @@ own range.}
 
 \item{color}{CSS color for the line or bars (defaults to the stylesheet's).}
 
-\item{width, height}{Pixel size of each cell's SVG.}
+\item{width, height}{Pixel size of each cell's SVG. \code{width} may instead be a
+relative CSS width (e.g. \code{"100\%"}), or \code{list(min =, width =)}, to auto-fit
+the column (see \code{\link[=lt_errorbar]{lt_errorbar()}}).}
 
 \item{hide}{If \code{TRUE} (default) and the series spans several columns, those
 columns after the first are hidden (their values are drawn into the plot);

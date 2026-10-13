@@ -379,7 +379,9 @@
     // table has row detail) are added below.
     el._lt = {
       spec, state,
-      refresh: () => uiRefresh(),
+      // re-render the body. `stale` (default) recomputes the view and resets to
+      // page 1; `false` keeps the current view and page (e.g. a plot refit)
+      refresh: (stale = true) => uiRefresh(stale),
       // the current filtered + sorted row indices (1-based, every row, not just
       // the page) — e.g. for a "download what's shown" button that must honor the
       // typed filters (which live in state.filters, not external predicates)
