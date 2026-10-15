@@ -342,7 +342,9 @@ e.g. <code>lt_css(x, "lt-gt.css")</code> uses the bundled gt-like theme.
 are selectors (e.g., <code>.na</code>, <code>td.highlight</code>) and values are either a
 CSS string or a named list of properties:
 <code>lt_css(x, .na = "background: #eee")</code> or
-<code>lt_css(x, .na = list(background = "#eee"))</code>.</p>
+<code>lt_css(x, .na = list(background = "#eee"))</code>. The selectors and rules can
+also be given as a single <code>list(selectors, rules)</code> of two parallel vectors
+(see <code><a href="#sec:man-lt-label">lt_label()</a></code>).</p>
 </td></tr>
 </table>
 <h3 id="sec:value_4" class="unnumbered unlisted">Value</h3>
@@ -842,7 +844,7 @@ HTML but cannot run JavaScript (e.g., GitHub Flavored Markdown).
 f1 = tempfile(fileext = '.html')
 lt_export(tbl, f1, method = 'raw')  # file output
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//RtmpM58LJh/fileddb65e72189.html&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpVeaXCT/file1c821490a2a3.html&quot;
 </code></pre>
 <pre><code class="language-r"># Bake a static &lt;table&gt; (needs Node.js or a headless browser).
 if (lt:::can_bake())
@@ -956,7 +958,7 @@ if (lt:::has_browser()) {
   lt_export(tbl, f3, width = 400)
 }
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//RtmpM58LJh/fileddb51620c55.png&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpVeaXCT/file1c82dee5cb3.png&quot;
 </code></pre>
 <pre><code class="language-r">unlink(c(f1, f2, f3))
 </code></pre>
@@ -1464,7 +1466,8 @@ lt(head(mtcars)) |&gt; lt_interactive(download = 'cars.csv')
 label in <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code> to treat it as raw HTML. Alternatively, pass a single named
 list or named character vector mapping column names to labels, which is
 convenient when the labels are computed programmatically, e.g.
-<code>lt_label(x, c(mpg = "Miles/Gallon", cyl = "Cylinders"))</code>.</p>
+<code>lt_label(x, c(mpg = "Miles/Gallon", cyl = "Cylinders"))</code>, or as a single
+<code>list(names, labels)</code> of two parallel vectors.</p>
 </td></tr>
 </table>
 <h3 id="sec:value_18" class="unnumbered unlisted">Value</h3>
@@ -1476,6 +1479,8 @@ convenient when the labels are computed programmatically, e.g.
 lt(head(mtcars)) |&gt; lt_label(mpg = I(&quot;Miles/Gallon&lt;sup&gt;*&lt;/sup&gt;&quot;))
 # a single named list or vector of labels
 lt(head(mtcars)) |&gt; lt_label(c(mpg = &quot;Miles/Gallon&quot;, cyl = &quot;Cylinders&quot;))
+# a single list(names, labels) of two parallel vectors
+lt(head(mtcars)) |&gt; lt_label(list(c(&quot;mpg&quot;, &quot;cyl&quot;), c(&quot;Miles/Gallon&quot;, &quot;Cylinders&quot;)))
 </code></pre>
 <h2 id="sec:man-lt_merge"><span class="section-number main-number">20</span> Merge columns</h2>
 <h3 id="sec:description_20" class="unnumbered unlisted">Description</h3>
@@ -1951,9 +1956,10 @@ lt(d) |&gt; lt_sub(missing = &quot;n/a&quot;, zero = &quot;—&quot;, small = 0.
 <tr><td><code>...</code></td>
 <td>
 <p>Named arguments of the form <code>col_name = "width"</code> set the
-widths of individual columns. A single unnamed argument sets the width
+widths of individual columns. A single unnamed scalar sets the width
 of the whole table. Widths can be any CSS value (e.g., <code>"100px"</code>,
-<code>"20%"</code>, <code>"8em"</code>).</p>
+<code>"20%"</code>, <code>"8em"</code>). The column widths can instead be given as a single
+<code>list(names, widths)</code> of two parallel vectors.</p>
 </td></tr>
 </table>
 <h3 id="sec:value_28" class="unnumbered unlisted">Value</h3>
@@ -1963,6 +1969,8 @@ of the whole table. Widths can be any CSS value (e.g., <code>"100px"</code>,
 <pre><code class="language-r">lt(head(mtcars)) |&gt; lt_width(mpg = &quot;100px&quot;, cyl = &quot;50px&quot;)
 # set the whole-table width, optionally with column widths
 lt(head(mtcars)) |&gt; lt_width(&quot;80%&quot;, mpg = &quot;100px&quot;)
+# a single list(names, widths) of two parallel vectors
+lt(head(mtcars)) |&gt; lt_width(list(c(&quot;mpg&quot;, &quot;cyl&quot;), c(&quot;100px&quot;, &quot;50px&quot;)))
 </code></pre>
 <h2 id="sec:man-lt_wrap"><span class="section-number main-number">30</span> Set attributes on the table's container</h2>
 <h3 id="sec:description_30" class="unnumbered unlisted">Description</h3>
@@ -1983,7 +1991,9 @@ this table alone, or giving the container a fixed width.
 <tr><td><code>...</code></td>
 <td>
 <p>Named HTML attributes for the container, e.g. <code>class = "striped"</code>,
-<code>style = "width:800px"</code>, <code>id = "tbl1"</code>.</p>
+<code>style = "width:800px"</code>, <code>id = "tbl1"</code>. The names and values can also be
+given as a single <code>list(names, values)</code> of two parallel vectors (see
+<code><a href="#sec:man-lt-label">lt_label()</a></code>).</p>
 </td></tr>
 </table>
 <h3 id="sec:value_29" class="unnumbered unlisted">Value</h3>

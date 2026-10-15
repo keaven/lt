@@ -90,6 +90,9 @@
 <p><code>lt_width()</code> can set the width of the whole table via an unnamed argument, e.g., <code>lt_width(&quot;80%&quot;)</code>. It can be combined with named column widths.</p>
 </li>
 <li>
+<p>The <code>name = value</code> setters (<code>lt_label()</code>, <code>lt_width()</code>, <code>lt_css()</code>, <code>lt_wrap()</code>) accept their names and values as a single unnamed <code>list(names, values)</code> of two parallel vectors, e.g., <code>lt_label(x, list(cols, labels))</code>. This supplies the names from a variable, which <code>name = value</code> can’t express (its names must be literals). They also all accept a single named vector or list (previously only <code>lt_label()</code> did).</p>
+</li>
+<li>
 <p>Column selection now accepts integer positions in addition to column names and one-sided formulas, e.g., <code>lt_align(x, 1:2, &quot;center&quot;)</code> or <code>lt_spanner(x, &quot;Grp&quot;, columns = 2:3)</code>. This applies to all functions that select columns (<code>lt_align()</code>, <code>lt_spanner()</code>, <code>lt_format()</code>, <code>lt_date()</code>, <code>lt_footnote()</code>, <code>lt_html()</code>, <code>lt_sub()</code>, <code>lt_merge()</code>, <code>lt_style()</code>, <code>lt_move()</code>, and <code>lt_group()</code>).</p>
 </li>
 </ul>
