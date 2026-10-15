@@ -84,6 +84,24 @@ add_op = function(x, type, ...) {
 
 camel2dash = function(x) gsub('([A-Z])', '-\\L\\1', x, perl = TRUE)
 
+# Canonicalize a `...`-style name = value mapping into a named list. Three forms
+# produce the same result:
+#   f(a = 1, b = 2)               # named arguments
+#   f(c(a = 1, b = 2))            # a single named vector or list
+#   f(list(c("a", "b"), c(1, 2))) # a single list(names, values) of two parallel
+#                                 #   vectors
+# Any other `...` is returned unchanged, so a caller's own unnamed-argument
+# handling still sees it.
+name_value_args = function(...) {
+  args = list(...)
+  if (length(args) != 1 || !is.null(names(args))) return(args)
+  a = args[[1]]
+  if (!is.null(names(a))) return(as.list(a))               # single named vector/list
+  if (is.list(a) && length(a) == 2)                        # single list(names, values)
+    return(`names<-`(as.list(a[[2]]), a[[1]]))
+  args
+}
+
 # Resolve a column selection to column names. `cols` may be:
 # - a one-sided formula; if its right-hand side references the pronoun `.`
 #   (the character vector of column names), it is evaluated as a predicate and
