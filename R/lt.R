@@ -98,8 +98,16 @@ name_value_args = function(...) {
   a = args[[1]]
   if (!is.null(names(a))) return(as.list(a))               # single named vector/list
   if (is.list(a) && length(a) == 2)                        # single list(names, values)
-    return(`names<-`(as.list(a[[2]]), a[[1]]))
+    return(set_names(a[[2]], a[[1]], to_list = TRUE))
   args
+}
+
+# Set names, and optionally coerce x to list (as.list() would drop class of x's
+# values, e.g. I(), so lapply() instead)
+set_names = function(x, nm, to_list = FALSE) {
+  if (to_list) x = lapply(seq_along(x), function(i) x[i])
+  names(x) = nm
+  x
 }
 
 # Resolve a column selection to column names. `cols` may be:
