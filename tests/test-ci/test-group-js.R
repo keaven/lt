@@ -6,7 +6,7 @@ assert("separator row groups render correctly", {
     data = list(g = c("A", "A", "B"), v = 1:3),
     row_group = "g"
   ))
-  (matches(html, '.*class="lt-row-group".*>A</th>.*>B</th>.*') %==% "")
+  (has_match(html, 'class="lt-row-group".*>A</th>.*>B</th>'))
 })
 
 assert("rowspan row groups render label + filler cells", {
@@ -18,9 +18,9 @@ assert("rowspan row groups render label + filler cells", {
     data = list(g = c("A", "A", "A", "B"), v = 1:4),
     row_group = list("g")
   ))
-  (matches(html, '.*<th scope="row" class="lt-row-group lt-row-open">A</th>.*') %==% "")
-  (matches(html, '.*<th class="lt-row-group" rowspan="2"></th>.*') %==% "")
-  (matches(html, '.*<th scope="row" class="lt-row-group">B</th>.*') %==% "")
+  (has_match(html, '<th scope="row" class="lt-row-group lt-row-open">A</th>'))
+  (has_match(html, '<th class="lt-row-group" rowspan="2"></th>'))
+  (has_match(html, '<th scope="row" class="lt-row-group">B</th>'))
   # the label cell must not span rows itself
   (grepl('rowspan="[0-9]+">A</th>', html) %==% FALSE)
 })
@@ -31,7 +31,7 @@ assert("two-row group filler omits the rowspan attribute", {
     data = list(g = c("A", "A"), v = 1:2),
     row_group = list("g")
   ))
-  (matches(html, '.*<th class="lt-row-group"></th>.*') %==% "")
+  (has_match(html, '<th class="lt-row-group"></th>'))
   (grepl('rowspan', html) %==% FALSE)
 })
 
@@ -44,7 +44,7 @@ assert("column widths align past rowspan group columns", {
     row_group = list("g"),
     ops = list(list(type = "width", widths = list(v = "9em")))
   ))
-  (matches(html, '.*<colgroup><col><col style="width:9em"></colgroup>.*') %==% "")
+  (has_match(html, '<colgroup><col><col style="width:9em"></colgroup>'))
 })
 
 assert("full-width control rows span the rowspan group columns too", {
@@ -82,5 +82,5 @@ assert("sort by groups reorders rows", {
     row_group = list("g")
   ))
   # After sorting by g, A rows (2,4) come before B rows (1,3)
-  (matches(html, ".*>2</td>.*>1</td>.*") %==% "")
+  (has_match(html, ">2</td>.*>1</td>"))
 })

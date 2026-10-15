@@ -9,7 +9,7 @@ assert("footnotes render in tfoot", {
       location = list(type = "column_labels", columns = list("x"))
     ))
   ))
-  (matches(html, '.*<tfoot class="lt-footer">.*> A note</td>.*') %==% "")
+  (has_match(html, '<tfoot class="lt-footer">.*> A note</td>'))
 })
 
 assert("footnote on the title renders a marker in the caption", {
@@ -20,7 +20,7 @@ assert("footnote on the title renders a marker in the caption", {
       text = "tn", location = list(type = "title", group = "title")
     ))
   ))
-  (matches(html, '.*class="lt-title".*class="lt-fnref".*> tn</td>.*') %==% "")
+  (has_match(html, 'class="lt-title".*class="lt-fnref".*> tn</td>'))
 })
 
 assert("footnote on row groups matches by starts_with", {
@@ -33,8 +33,8 @@ assert("footnote on row groups matches by starts_with", {
     ))
   ))
   # Marker attaches to the "Apple" group header, and only one footnote exists.
-  (matches(html, '.*Apple<sup class="lt-fnref".*> sn</td>.*') %==% "")
-  (matches(html, ".*Banana<sup.*") %==% html)
+  (has_match(html, 'Apple<sup class="lt-fnref".*> sn</td>'))
+  (has_match(html, "Banana<sup", negate = TRUE))
 })
 
 assert("footnote on row groups renders in rowspan mode", {
@@ -49,6 +49,6 @@ assert("footnote on row groups renders in rowspan mode", {
     ))
   ))
   # Marker on the "A" label cell; "B" has no marker; one footnote in tfoot.
-  (matches(html, '.*class="lt-row-group lt-row-open">A<sup class="lt-fnref".*') %==% "")
-  (matches(html, ".*>B<sup.*") %==% html)
+  (has_match(html, 'class="lt-row-group lt-row-open">A<sup class="lt-fnref"'))
+  (has_match(html, ">B<sup", negate = TRUE))
 })

@@ -122,7 +122,7 @@ if (can_bake())
     out = lt_export(lt(data.frame(a = 1:2, b = c("x", "y"))), html)
     (out %==% html)
     txt = readLines(html)
-    (matches(txt, ".*<table.*>b</th>.*>1</td>.*>x</td>.*") %==% "")
+    (has_match(txt, "<table.*>b</th>.*>1</td>.*>x</td>"))
   })
 
 # output = NA returns the HTML string instead of writing a file.
@@ -130,14 +130,14 @@ if (can_bake())
   assert("lt_export(output = NA) returns the HTML string", {
     html = lt_export(lt(data.frame(a = 1:2, b = c("x", "y"))), NA)
     (is.character(html))
-    (matches(html, ".*<table.*>1</td>.*>x</td>.*") %==% "")
+    (has_match(html, "<table.*>1</td>.*>x</td>"))
   })
 
 # method = "raw" writes the JavaScript-spec HTML (table built client-side),
 # so the file carries the lt.js runtime and the spec, not a baked <table>.
 assert('lt_export(method = "raw") emits the JS spec, no external tool', {
   html = lt_export(lt(data.frame(a = 1:2)), NA, method = "raw")
-  (matches(html, ".*<script>.*LT.*</script>.*") %==% "")
+  (has_match(html, "<script>.*LT.*</script>"))
 })
 
 # tidy = TRUE pretty-prints the baked <table>: multi-line, indented, with each

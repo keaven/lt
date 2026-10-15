@@ -4,19 +4,19 @@ x = lt(d)
 assert("format() returns HTML with script tags", {
   html = format(x)
   (is.character(html))
-  (matches(html, ".*<script>.*</script>.*") %==% "")
+  (has_match(html, "<script>.*</script>"))
 })
 
 assert("format(fragment = FALSE) wraps in DOCTYPE", {
   html = format(x, fragment = FALSE)
-  (matches(html, ".*<!DOCTYPE html>.*</html>.*") %==% "")
+  (has_match(html, "<!DOCTYPE html>.*</html>"))
 })
 
 assert("format(assets = FALSE) omits runtime", {
   html = unclass(format(x, assets = FALSE))
-  (matches(html, ".*<style>.*") %==% html)
-  (matches(html, ".*LT\\.build.*") %==% html)
-  (matches(html, ".*<script>.*") %==% "")
+  (has_match(html, "<style>", negate = TRUE))
+  (has_match(html, "LT\\.build", negate = TRUE))
+  (has_match(html, "<script>"))
 })
 
 assert("format() ships the graphics module (before core) only for plot tables", {
@@ -63,8 +63,8 @@ assert("lt_sparkline() records a sparkline op and hides extra columns", {
 })
 
 assert("inline_safe() escapes </script in content", {
-  (matches(inline_safe("x</script>y"), ".*<\\\\/script.*") %==% "")
-  (matches(inline_safe("x</SCRIPT>y"), ".*<\\\\/SCRIPT.*") %==% "")
+  (has_match(inline_safe("x</script>y"), "<\\\\/script"))
+  (has_match(inline_safe("x</SCRIPT>y"), "<\\\\/SCRIPT"))
   # does not alter other tags
   (inline_safe("x</div>y") %==% "x</div>y")
 })
@@ -73,14 +73,14 @@ assert("asset_url() uses local file:// when lt.local = TRUE", {
   op = options(lt.local = TRUE)
   on.exit(options(op))
   url = asset_url("lt.js")
-  (matches(url, ".*file://.*lt\\.js.*") %==% "")
+  (has_match(url, "file://.*lt\\.js"))
 })
 
 assert("asset_url() uses CDN by default", {
   op = options(lt.local = NULL, lt.assets_url = NULL)
   on.exit(options(op))
   url = asset_url("lt.js")
-  (matches(url, ".*cdn\\.jsdelivr\\.net.*lt\\.min\\.js.*") %==% "")
+  (has_match(url, "cdn\\.jsdelivr\\.net.*lt\\.min\\.js"))
 })
 
 assert("asset_url() respects lt.assets_url option", {
@@ -96,9 +96,9 @@ assert("spec_block() drops css and rules", {
   x2$rules = ".na { color: red }"
   sb = spec_block(x2)
   html = paste(sb, collapse = "")
-  (matches(html, ".*some\\.css.*") %==% html)
-  (matches(html, ".*color: red.*") %==% html)
-  (matches(html, ".*window\\.LT.*") %==% "")
+  (has_match(html, "some\\.css", negate = TRUE))
+  (has_match(html, "color: red", negate = TRUE))
+  (has_match(html, "window\\.LT"))
 })
 
 assert("spec_block() emits the missing default from the lt.missing option", {
@@ -110,12 +110,12 @@ assert("spec_block() emits the missing default from the lt.missing option", {
   # a custom option value is used verbatim
   options(lt.missing = "n/a")
   sb = paste(spec_block(lt(data.frame(a = 1))), collapse = "")
-  (matches(sb, '.*"missing": *"n/a".*') %==% "")
+  (has_match(sb, '"missing": *"n/a"'))
 
   # empty string is shipped, to override the runtime default and keep NAs blank
   options(lt.missing = "")
   sb = paste(spec_block(lt(data.frame(a = 1))), collapse = "")
-  (matches(sb, '.*"missing": *"".*') %==% "")
+  (has_match(sb, '"missing": *""'))
 })
 
 assert("spec_block() records explicit column order for array-index names", {
@@ -124,7 +124,7 @@ assert("spec_block() records explicit column order for array-index names", {
   # renderer can restore the original order.
   d = data.frame(rowname = "Z", "1" = 1, "2" = 2, check.names = FALSE)
   sb = paste(spec_block(lt(d)), collapse = "")
-  (matches(sb, '.*"columns".*\\[.*"rowname".*"1".*"2".*') %==% "")
+  (has_match(sb, '"columns".*\\[.*"rowname".*"1".*"2"'))
 
   # Ordinary names keep insertion order in JSON, so `columns` is omitted.
   sb2 = paste(spec_block(lt(data.frame(a = 1, b = 2))), collapse = "")
