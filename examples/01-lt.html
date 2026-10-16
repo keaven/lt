@@ -127,11 +127,14 @@ is <code>lt_footnote()</code>; and so on.</p>
   Align = c(1, 22, 333, 4),
   Width = c(&quot;lt_width()&quot;, &quot;sets&quot;, &quot;column&quot;, &quot;widths&quot;),
   Est   = c(&quot;0.61&quot;, &quot;0.79&quot;, &quot;0.45&quot;, &quot;0.90&quot;),
-  CI    = c(&quot;(0.40, 0.82)&quot;, &quot;(0.57, 1.01)&quot;, &quot;(0.20, 0.70)&quot;, &quot;(0.71, 1.14)&quot;)
+  CI    = c(&quot;(0.40, 0.82)&quot;, &quot;(0.57, 1.01)&quot;, &quot;(0.20, 0.70)&quot;, &quot;(0.71, 1.14)&quot;),
+  Eff   = c(0.12, -0.34, 0.45, -0.08),
+  EffLo = c(-0.05, -0.52, 0.21, -0.29),
+  EffHi = c(0.29, -0.16, 0.69, 0.13)
 )
 
 library(lt)
-lt(d, auto_format = FALSE) |&gt;
+tbl_cheat = lt(d, auto_format = FALSE) |&gt;
   # lt_group(): the &quot;lt_group()&quot; row-group header on the left
   lt_group(~ Grp) |&gt;
   # lt_header(): the title and subtitle at the top
@@ -147,8 +150,10 @@ lt(d, auto_format = FALSE) |&gt;
   lt_label(
     Grp = &quot;lt_group()&quot;, Width = &quot;lt_width()&quot;, Label = &quot;lt_label(old = new, ...)&quot;,
     Fmt = &quot;lt_format()&quot;, Sub = &quot;lt_sub()&quot;, Date = &quot;lt_date()&quot;,
-    Align = &quot;lt_align()&quot;, Est = &quot;lt_merge()&quot;
+    Align = &quot;lt_align()&quot;, Est = &quot;lt_merge()&quot;, Eff = &quot;lt_errorbar()&quot;
   ) |&gt;
+  # lt_errorbar(): draw an inline forest plot in the &quot;lt_errorbar()&quot; column
+  lt_errorbar(Eff ~ EffLo + EffHi, ref = 0, width = 100) |&gt;
   # lt_html(): render the &quot;Label&quot; column as raw HTML (note the link in row 1)
   lt_html(~ Label) |&gt;
   # lt_align(): center the &quot;lt_align()&quot; column
@@ -176,10 +181,15 @@ lt(d, auto_format = FALSE) |&gt;
   lt_footnote(I(&quot;Wrap text in &lt;code&gt;I()&lt;/code&gt; for raw HTML.&quot;), &quot;column&quot;, &quot;Label&quot;) |&gt;
   # lt_move(): explain it via a footnote, since it has no column of its own here
   lt_footnote(&quot;lt_move() can reorder columns as desired.&quot;, &quot;column&quot;, &quot;Est&quot;) |&gt;
+  # lt_errorbar(): point to the other inline plot types via a footnote
+  lt_footnote(&quot;lt_sparkline() and lt_dotplot() draw other inline plots.&quot;,
+    &quot;column&quot;, &quot;Eff&quot;) |&gt;
   # lt_note(): the footer note names itself and lt_export()
   lt_note(&quot;lt_note() — and lt_export() saves this table to HTML/PDF/PNG.&quot;)
+tbl_cheat
 </code></pre>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/css/lt.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/css/lt-plot.min.css">
 <style>.lt-table {
   .highlight { font-weight: bold; color: #c60; }
 }</style>
@@ -194,7 +204,10 @@ lt(d, auto_format = FALSE) |&gt;
     "Align": [1, 22, 333, 4],
     "Width": ["lt_width()", "sets", "column", "widths"],
     "Est": ["0.61", "0.79", "0.45", "0.90"],
-    "CI": ["(0.40, 0.82)", "(0.57, 1.01)", "(0.20, 0.70)", "(0.71, 1.14)"]
+    "CI": ["(0.40, 0.82)", "(0.57, 1.01)", "(0.20, 0.70)", "(0.71, 1.14)"],
+    "Eff": [0.12, -0.34, 0.45, -0.08],
+    "EffLo": [-0.05, -0.52, 0.21, -0.29],
+    "EffHi": [0.29, -0.16, 0.69, 0.13]
   },
   "ops": [
     {
@@ -213,8 +226,24 @@ lt(d, auto_format = FALSE) |&gt;
         "Sub": "lt_sub()",
         "Date": "lt_date()",
         "Align": "lt_align()",
-        "Est": "lt_merge()"
+        "Est": "lt_merge()",
+        "Eff": "lt_errorbar()"
       }
+    },
+    {
+      "type": "hide",
+      "columns": ["EffLo", "EffHi"]
+    },
+    {
+      "type": "errorbar",
+      "columns": ["Eff"],
+      "lowers": ["EffLo"],
+      "uppers": ["EffHi"],
+      "min": -0.52,
+      "max": 0.69,
+      "ref": 0,
+      "width": 100,
+      "height": 16
     },
     {
       "type": "align",
@@ -305,6 +334,13 @@ lt(d, auto_format = FALSE) |&gt;
         "type": "column_labels",
         "columns": ["Est"]
       }
+    },
+    {
+      "text": "lt_sparkline() and lt_dotplot() draw other inline plots.",
+      "location": {
+        "type": "column_labels",
+        "columns": ["Eff"]
+      }
     }
   ],
   "notes": [
@@ -312,6 +348,7 @@ lt(d, auto_format = FALSE) |&gt;
   ]
 }
 })</script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/js/lt-plot.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/js/lt.min.js" defer></script>
 <h2 id="sec:basics"><span class="section-number main-number">2</span> Basics</h2>
 <h3 id="sec:a-simple-table"><span class="section-number">2.1</span> A simple table</h3>
@@ -1454,7 +1491,6 @@ each cell.</p>
 lt(d_eff) |&gt;
   lt_errorbar(Est ~ Lo + Hi, ref = 0, axis = &quot;Effect (95% CI)&quot;)
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/css/lt-plot.min.css">
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
   "data": {
@@ -1484,7 +1520,6 @@ lt(d_eff) |&gt;
   ]
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.110/js/lt-plot.min.js" defer></script>
 <p>By default the plot is drawn into the first value column’s cells. Pass <code>into</code>
 to draw it into a dedicated column instead, so every value column stays visible
 as text alongside the plot. The named column is created when it does not exist;
@@ -1983,9 +2018,7 @@ lt(d) |&gt;
 <p><code>lt_export()</code> saves a table to a file. The format is chosen from the file
 extension: <code>.html</code>, <code>.pdf</code>, or (otherwise) <code>.png</code>. PDF and PNG are rendered in
 a headless Chromium browser.</p>
-<pre><code class="language-r">tbl = lt(head(penguins))
-</code></pre>
-<pre><code class="language-r">lt_export(tbl, &quot;01-lt.png&quot;)
+<pre><code class="language-r">lt_export(tbl_cheat, &quot;01-lt.png&quot;)
 </code></pre>
 <pre><code>#&gt; [1] &quot;01-lt.png&quot;
 </code></pre>
@@ -1995,7 +2028,7 @@ a headless Chromium browser.</p>
 <p><span class="ref-number-fig">1</span> A table exported to PNG.</p>
 </div>
 </div>
-<pre><code class="language-r">lt_export(tbl, &quot;01-lt.pdf&quot;)
+<pre><code class="language-r">lt_export(tbl_cheat, &quot;01-lt.pdf&quot;)
 </code></pre>
 <pre><code>#&gt; [1] &quot;01-lt.pdf&quot;
 </code></pre>
@@ -2008,7 +2041,8 @@ a headless Chromium browser.</p>
 <p>For <code>.html</code> output, the table can be baked into a static <code>&lt;table&gt;</code> (built once
 by running the lt.js runtime, so the saved file needs no JavaScript to view).
 Set <code>tidy = TRUE</code> to pretty-print it with line breaks and indentation:</p>
-<pre><code class="language-r">lt_export(tbl, NA, fragment = TRUE, css = FALSE, tidy = TRUE)
+<pre><code class="language-r">tbl = lt(head(penguins))
+lt_export(tbl, NA, fragment = TRUE, css = FALSE, tidy = TRUE)
 </code></pre>
 <pre><code class="language-html">&lt;div class=&quot;lt-wrap&quot;&gt;
   &lt;table class=&quot;lt-table&quot;&gt;

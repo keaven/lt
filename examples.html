@@ -87,11 +87,14 @@ d = data.frame(
   Align = c(1, 22, 333, 4),
   Width = c(&quot;lt_width()&quot;, &quot;sets&quot;, &quot;column&quot;, &quot;widths&quot;),
   Est   = c(&quot;0.61&quot;, &quot;0.79&quot;, &quot;0.45&quot;, &quot;0.90&quot;),
-  CI    = c(&quot;(0.40, 0.82)&quot;, &quot;(0.57, 1.01)&quot;, &quot;(0.20, 0.70)&quot;, &quot;(0.71, 1.14)&quot;)
+  CI    = c(&quot;(0.40, 0.82)&quot;, &quot;(0.57, 1.01)&quot;, &quot;(0.20, 0.70)&quot;, &quot;(0.71, 1.14)&quot;),
+  Eff   = c(0.12, -0.34, 0.45, -0.08),
+  EffLo = c(-0.05, -0.52, 0.21, -0.29),
+  EffHi = c(0.29, -0.16, 0.69, 0.13)
 )
 
 library(lt)
-lt(d, auto_format = FALSE) |&gt;
+tbl_cheat = lt(d, auto_format = FALSE) |&gt;
   # lt_group(): the &quot;lt_group()&quot; row-group header on the left
   lt_group(~ Grp) |&gt;
   # lt_header(): the title and subtitle at the top
@@ -107,8 +110,10 @@ lt(d, auto_format = FALSE) |&gt;
   lt_label(
     Grp = &quot;lt_group()&quot;, Width = &quot;lt_width()&quot;, Label = &quot;lt_label(old = new, ...)&quot;,
     Fmt = &quot;lt_format()&quot;, Sub = &quot;lt_sub()&quot;, Date = &quot;lt_date()&quot;,
-    Align = &quot;lt_align()&quot;, Est = &quot;lt_merge()&quot;
+    Align = &quot;lt_align()&quot;, Est = &quot;lt_merge()&quot;, Eff = &quot;lt_errorbar()&quot;
   ) |&gt;
+  # lt_errorbar(): draw an inline forest plot in the &quot;lt_errorbar()&quot; column
+  lt_errorbar(Eff ~ EffLo + EffHi, ref = 0, width = 100) |&gt;
   # lt_html(): render the &quot;Label&quot; column as raw HTML (note the link in row 1)
   lt_html(~ Label) |&gt;
   # lt_align(): center the &quot;lt_align()&quot; column
@@ -136,8 +141,12 @@ lt(d, auto_format = FALSE) |&gt;
   lt_footnote(I(&quot;Wrap text in &lt;code&gt;I()&lt;/code&gt; for raw HTML.&quot;), &quot;column&quot;, &quot;Label&quot;) |&gt;
   # lt_move(): explain it via a footnote, since it has no column of its own here
   lt_footnote(&quot;lt_move() can reorder columns as desired.&quot;, &quot;column&quot;, &quot;Est&quot;) |&gt;
+  # lt_errorbar(): point to the other inline plot types via a footnote
+  lt_footnote(&quot;lt_sparkline() and lt_dotplot() draw other inline plots.&quot;,
+    &quot;column&quot;, &quot;Eff&quot;) |&gt;
   # lt_note(): the footer note names itself and lt_export()
   lt_note(&quot;lt_note() — and lt_export() saves this table to HTML/PDF/PNG.&quot;)
+tbl_cheat
 ```
 
 ## Basics
@@ -825,12 +834,8 @@ can_export = lt:::can_bake()
 extension: `.html`, `.pdf`, or (otherwise) `.png`. PDF and PNG are rendered in
 a headless Chromium browser.
 
-```{r}
-tbl = lt(head(penguins))
-```
-
 ```{r, eval = can_export}
-lt_export(tbl, &quot;01-lt.png&quot;)
+lt_export(tbl_cheat, &quot;01-lt.png&quot;)
 ```
 
 :::: {#fig:lt-png .figure}
@@ -842,7 +847,7 @@ lt_export(tbl, &quot;01-lt.png&quot;)
 ::::
 
 ```{r, eval = can_export}
-lt_export(tbl, &quot;01-lt.pdf&quot;)
+lt_export(tbl_cheat, &quot;01-lt.pdf&quot;)
 ```
 
 :::: {#fig:lt-pdf .figure}
@@ -858,6 +863,7 @@ by running the lt.js runtime, so the saved file needs no JavaScript to view).
 Set `tidy = TRUE` to pretty-print it with line breaks and indentation:
 
 ```{r, attr.output = '.html', eval = can_export}
+tbl = lt(head(penguins))
 lt_export(tbl, NA, fragment = TRUE, css = FALSE, tidy = TRUE)
 ```
 
