@@ -107,6 +107,20 @@ assert("download reaches the client spec as true or a file name, else absent", {
   (grepl('download', format(lt(d) |> lt_interactive(), assets = FALSE)) %==% FALSE)
   (grepl('download',
          format(lt(d) |> lt_interactive(download = FALSE), assets = FALSE)) %==% FALSE)
+  # the shaper drops a disabled download so no key is serialized
+  (download_opt(NULL) %==% NULL)
+  (download_opt(FALSE) %==% NULL)
+  # TRUE and a bare file name pass through unchanged
+  (download_opt(TRUE) %==% TRUE)
+  (download_opt('cars.csv') %==% 'cars.csv')
+  # raw mode serializes an object carrying the mode (and file, if given)
+  (download_opt(list(file = 'cars.csv', mode = 'raw')) %==%
+     list(file = 'cars.csv', mode = 'raw'))
+  # raw mode with the default file name omits the file slot
+  (download_opt(list(mode = 'raw')) %==% list(mode = 'raw'))
+  # the display mode stays implicit: a bare string (or TRUE), never a mode key
+  (download_opt(list(file = 'cars.csv', mode = 'display')) %==% 'cars.csv')
+  (download_opt(list(mode = 'display')) %==% TRUE)
 })
 
 assert("detail = column names resolves to a name array; js() stays verbatim", {

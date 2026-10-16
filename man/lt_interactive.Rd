@@ -94,10 +94,14 @@ may carry its own \code{interactive} field to make the detail table interactive.
 
 \item{download}{Whether to add a button that downloads the table as a CSV
 file. The file holds the current view (every row the filters and search
-keep, in sort order, across all pages) of the table's columns, using the
-displayed cell text. \code{TRUE} adds the button with a default file name; a
-string sets the file name (a \code{.csv} extension is added if missing).
-\code{FALSE} (the default) adds no button.}
+keep, in sort order, across all pages) of the table's columns. \code{TRUE} adds
+the button with a default file name; a string sets the file name (a \code{.csv}
+extension is added if missing). For more control, pass a list with any of
+\code{file} (the file name) and \code{mode}: \code{"display"} (the default) exports the
+displayed cell text, while \code{"raw"} exports the underlying unformatted
+values (full precision, no thousands separators or percent signs), handier
+to re-import for analysis. Row detail (\code{detail}) is never included. \code{FALSE}
+(the default) adds no button.}
 }
 \value{
 \code{x} with interactivity enabled.
@@ -148,4 +152,6 @@ lt(head(mtcars)) |> lt_interactive(
 # a button to download the current view as a CSV file
 lt(head(mtcars)) |> lt_interactive(download = TRUE)
 lt(head(mtcars)) |> lt_interactive(download = 'cars.csv')
+# export the raw (unformatted) values instead of the displayed text
+lt(head(mtcars)) |> lt_interactive(download = list(file = 'cars.csv', mode = 'raw'))
 }

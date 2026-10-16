@@ -91,10 +91,14 @@
 #'   `NULL` (the default) adds no row detail.
 #' @param download Whether to add a button that downloads the table as a CSV
 #'   file. The file holds the current view (every row the filters and search
-#'   keep, in sort order, across all pages) of the table's columns, using the
-#'   displayed cell text. `TRUE` adds the button with a default file name; a
-#'   string sets the file name (a `.csv` extension is added if missing).
-#'   `FALSE` (the default) adds no button.
+#'   keep, in sort order, across all pages) of the table's columns. `TRUE` adds
+#'   the button with a default file name; a string sets the file name (a `.csv`
+#'   extension is added if missing). For more control, pass a list with any of
+#'   `file` (the file name) and `mode`: `"display"` (the default) exports the
+#'   displayed cell text, while `"raw"` exports the underlying unformatted
+#'   values (full precision, no thousands separators or percent signs), handier
+#'   to re-import for analysis. Row detail (`detail`) is never included. `FALSE`
+#'   (the default) adds no button.
 #' @return `x` with interactivity enabled.
 #' @export
 #' @examples
@@ -125,6 +129,8 @@
 #' # a button to download the current view as a CSV file
 #' lt(head(mtcars)) |> lt_interactive(download = TRUE)
 #' lt(head(mtcars)) |> lt_interactive(download = 'cars.csv')
+#' # export the raw (unformatted) values instead of the displayed text
+#' lt(head(mtcars)) |> lt_interactive(download = list(file = 'cars.csv', mode = 'raw'))
 lt_interactive = function(
   x, sort = TRUE, search = TRUE, filter = FALSE, pager = c(10, 25, 50, 100),
   resize = FALSE, hide = NULL, detail = NULL, download = FALSE
@@ -143,10 +149,22 @@ lt_interactive = function(
     list(hidden = I(as.character(f_cols(hide, x$data))))
   if (!is.null(detail)) opts$detail = if (inherits(detail, 'JS_LITERAL'))
     detail else I(as.character(f_cols(detail, x$data)))
-  if (!is.null(download) && !isFALSE(download))
-    opts$download = if (isTRUE(download)) TRUE else as.character(download)[1]
+  opts$download = download_opt(download)
   x$interactive = opts
   x
+}
+
+# Shape the `download` argument for the client: a bare file name (or `TRUE`)
+# when only the name differs, else an object of the non-default slots, so a
+# plain download never serializes a `mode` key.
+download_opt = function(download) {
+  if (is.null(download) || isFALSE(download)) return()
+  if (isTRUE(download)) return(TRUE)
+  if (is.character(download)) download = list(file = download)
+  mode = download$mode
+  if (identical(mode, 'display')) mode = NULL  # the default; keep it implicit
+  if (is.null(mode)) return(download$file %||% TRUE)
+  drop_null(list(file = download$file, mode = mode))
 }
 
 # Shape the `filter` argument for the client as { default?, cols? }. `TRUE` ->

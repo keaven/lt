@@ -1,35 +1,22 @@
 # CHANGES IN lt VERSION 0.5
 
-- Added `lt_interactive()` to make a table interactive in the browser. The controls are rows of the table itself, so they are exactly as wide as it is, and everything is handled client-side by an extension (`lt-interactive.js`/`.css`) loaded only for tables that opt in, so the base runtime stays small for everyone else. The features:
+- Added `lt_interactive()` to make a table interactive in the browser: click-to-sort headers, a search box, per-column filters (plain, or typed dropdown/range/checklist widgets), pagination, column resizing, a column-visibility menu, expandable row detail, and a CSV download of the current view. Everything runs client-side via an extension loaded only for opted-in tables, and sorting and filtering stay within each row group or subtree.
 
-  - **Sort**: click-to-sort column headers (cycling ascending, descending, unsorted). Shift-click adds a column as a further tie-breaker, so several columns sort at once; `sort` can also request an initial sort.
-  - **Search**: a table-wide search box. Terms match the displayed text case-insensitively (a leading `!` negates); a term that mentions `x` (e.g., `x > 5`) is evaluated as a JavaScript expression against the raw values.
-  - **Filter** (`filter`): a per-column box, matching like the search but against one column. A column can instead take a typed `"select"` dropdown, `"range"` slider, or `"checklist"` of checkboxes (each paired with an expression box that stays in sync), rendered as a funnel under its header — or, for a column hidden from the table, as a chip in the control bar. A column with nothing to filter (every value blank) gets no box.
-  - **Pager** (`pager`): pagination, on by default; `Inf` is a valid page size (all rows). The initial render emits only the first page, so a very large table no longer builds the whole table up front.
-  - **Resize** (`resize`): drag a column's right edge to resize it.
-  - **Hide** (`hide`): an eye button opening a checklist that toggles columns.
-  - **Detail** (`detail`): an expand caret per row that reveals a drill-down table built from that row.
-  - **Download** (`download`): a button that downloads the current view (every row the filters and search keep, in sort order, across all pages) as a CSV file, using the displayed cell text.
+- Added `lt_errorbar()`, `lt_sparkline()`, and `lt_dotplot()` to draw lightweight inline plots (error bars, line/bar sparklines, dot plots) in table cells: only the numbers travel to the client and the SVG is drawn in the browser.
 
-  Row structure is honored — sorting and filtering happen *within* each group or subtree, never across it. Separator row groups keep their order (a group whose rows all filter out drops its header); indentation sorts siblings under each parent (a child keeps its ancestors visible); and rowspan row groups (the default `lt_group()` rendering) sort and filter within each run while clicking a group header reorders its blocks — with several group columns the view stays nested, and the spanning cells are redrawn to match.
+- Interactive tables expose a controller `el._lt` for driving filters and row detail from external widgets, plus `LT.ui` helpers (`popover()`, `checklist()`, `chip()`) and a new `LT.render(el, spec)` for building such widgets and on-demand tables.
 
-- Added `lt_errorbar()`, `lt_sparkline()`, and `lt_dotplot()` to draw inline plots in table cells. `lt_errorbar()` draws a point estimate with lower/upper bounds (several series can be stacked in one cell, with a colored footer legend and an optional reference line and axis); `lt_sparkline()` draws a per-row line or bar chart from a list-column or several numeric columns read across the row; and `lt_dotplot()` draws one dot per column on a shared scale, optionally colored with a legend and staggered onto separate tracks so near-equal values do not overlap. All three are lightweight: only the numbers travel to the client and the SVG is drawn in the browser, so an interactive table (`lt_interactive()`) draws only the rows on the current page. By default the plot is drawn into the first value column's cells; `lt_errorbar()` and `lt_dotplot()` also take `into=` to name a dedicated column to draw into instead (created when it does not exist), so the value columns can stay visible as text alongside the plot.
+- Column selection now accepts predicate formulas referencing the pronoun `.` (the column names), e.g. `~ endsWith(., "_time")`, in all functions that select columns.
 
-- Interactive tables now expose a controller on the rendered table element as `el._lt`, whose `filter(id, fn)` method installs a custom predicate for a column. External widgets (e.g. a dropdown or range slider built outside the table) can drive filtering through it, without the built-in filter boxes. The row object handed to the predicate carries *every* column, including ones hidden from the table, so a widget can filter on a hidden helper column. The controller also exposes `el._lt.bar`, the control-bar element (or `null` when the table has none), for a caller to append its own widget to, and `el._lt.chips`, its chip group (collapsed until something is added), the right home for a caller's own labelled chip beside the typed-filter ones; and, for a table with row detail, `el._lt.resetDetail(row)`, which drops the memoized detail of one row (or every row, with no argument) and re-renders the open details, so a detail already expanded is rebuilt from its callback after a widget changes what that callback returns. To help build such a widget, `LT.ui` exposes the reusable `popover()` (a funnel + popover panel), `checklist()` (a list of checkboxes), and `chip()` (a labelled control-bar chip, with `mark()`/`summarize()`) used by the built-in controls.
+- `lt_label()` now also accepts a named list or vector mapping column names to labels.
 
-- The lt.js runtime gained `LT.render(el, spec)`, which renders a spec into a container element at any time (unlike `LT.build()`, which has to be called from an inline `<script>` while the page is parsing). This is for tables built on demand, e.g., a table rendered when the reader expands a row.
+- Added `lt_wrap()` to set HTML attributes on the `.lt-wrap` container, a hook for scoping custom CSS or sizing a table.
 
-- Column selection now accepts predicate formulas: a one-sided formula whose right-hand side references the pronoun `.` (the character vector of column names) is evaluated as a predicate, and a logical result selects the matching names, e.g., `lt_spanner(x, "Time", columns = ~ endsWith(., "_time"))` or `lt_format(x, ~ grepl("_prob$", .), decimals = 2)`. A character result (e.g., `~ grep("_x$", ., value = TRUE)`) is used as-is. Bare-name formulas (e.g., `~ a + b`) continue to work unchanged. This applies to all functions that select columns.
+- `lt_spanner()` no longer requires its `columns` in visual order; they are reordered to match the body before rendering (they must still be contiguous).
 
-- `lt_label()` now also accepts a single named list or named character vector mapping column names to labels (e.g., `lt_label(x, c(mpg = "Miles/Gallon", cyl = "Cylinders"))`), which is convenient when labels are computed programmatically. Named arguments (e.g., `lt_label(x, mpg = "Miles/Gallon")`) continue to work.
+- `lt_export()` no longer drops a `lt_css()` stylesheet attached by a relative path (thanks, @tgerke, #7).
 
-- Added `lt_wrap()` to set arbitrary HTML attributes (`class`, `style`, `id`, ...) on the `.lt-wrap` container that wraps a table, a hook for scoping custom CSS (e.g. from `lt_css()`) to one table or giving the container a fixed width.
-
-- `lt_spanner()` no longer requires its `columns` to be listed in the table's visual (left-to-right) order. The columns of an explicit spanner are now reordered to match the final body order (after any `lt_move()`) before rendering, so a spanner is drawn correctly regardless of the order in which its columns were listed. This also makes predicate selectors (e.g., `columns = ~ endsWith(., "_time")`) safe to use for spanners. The columns must still be contiguous in the table body.
-
-- `lt_export()` to PDF or PNG no longer silently drops a stylesheet attached by `lt_css()` with a relative path (e.g. `lt_css(x, "times.css")`). Those renders re-root the page to a temporary directory, where a relative link no longer resolved; existing local stylesheet files are now absolutized for that render pass only (the HTML output keeps relative paths, which are more portable; thanks, @tgerke, #7).
-
-- `lt_export()` no longer spills a cropped PDF onto a second page (holding a repeated header and the footnotes) when the rendered height of the table is fractional, e.g., with two footnote rows. The measured height is now rounded up by 1px, as the width already was.
+- `lt_export()` no longer spills a cropped PDF onto a second page when the table height is fractional.
 
 # CHANGES IN lt VERSION 0.4
 
