@@ -3,9 +3,10 @@ d = data.frame(x = 1:3, y = c("b", "a", "c"))
 # Marker occurring exactly once in each asset, so it can be counted as well
 # as looked for. Bare class or file name is not enough: CSS class names
 # appear in extension's script too, and `lt-interactive` appears in a
-# comment inside core lt.js.
-ext_css = '[.]lti-sort \\{'; ext_js = 'LT[.]plugins[.]interactive = \\{'
-core_css = '[.]lt-wrap \\{'; core_js = 'root[.]LT = \\{'
+# comment inside core lt.js. Optional spaces let it match the minified assets
+# shipped in the built package too.
+ext_css = '[.]lti-sort ?\\{'; ext_js = '[.]plugins[.]interactive ?= ?\\{'
+core_css = '[.]lt-wrap ?\\{'; core_js = '[.]LT ?= ?\\{'
 
 assert("the interactive extension is included only for a table that opts in", {
   html = format(lt(d) |> lt_interactive())
