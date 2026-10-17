@@ -233,11 +233,14 @@ assert("an auto-fit plot tracks a column-only width change (browser)", {
     'var op = t._ltSpec.ops.find(o => o.fit), w0 = op._w;',
     'var ci = t._ltSpec._cols.indexOf("forest");',
     't.querySelectorAll("colgroup col")[ci].style.width = "200px";',
-    # let observer fire, redraw (observer -> rAF -> rebuild) settle
-    'setTimeout(function(){',
-    'document.body.dataset.out = [w0, op._w,',
-    ' t.querySelector(".lt-eb").getAttribute("width")].join(",");',
-    'document.body.dataset.ready = "1";}, 100);'
+    # poll until redraw (observer -> rAF -> rebuild) catches up; slow runners
+    # (macOS CI) need more than a fixed delay
+    'var n = 0, done = function(){',
+    'var sw = t.querySelector(".lt-eb").getAttribute("width");',
+    'if (+sw !== op._w && ++n < 50) return setTimeout(done, 100);',
+    'document.body.dataset.out = [w0, op._w, sw].join(",");',
+    'document.body.dataset.ready = "1";};',
+    'setTimeout(done, 100);'
   )
   html = sub('</head>', sprintf(
     '<script>addEventListener("load", function() {var t = document.querySelector(".lt-table");%s})</script></head>',
