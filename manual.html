@@ -844,7 +844,7 @@ HTML but cannot run JavaScript (e.g., GitHub Flavored Markdown).
 f1 = tempfile(fileext = '.html')
 lt_export(tbl, f1, method = 'raw')  # file output
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmp5nJYII/file1ece7c11d9a5.html&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpk9ORpp/file161379621cd6.html&quot;
 </code></pre>
 <pre><code class="language-r"># Bake a static &lt;table&gt; (needs Node.js or a headless browser).
 if (lt:::can_bake())
@@ -958,7 +958,7 @@ if (lt:::has_browser()) {
   lt_export(tbl, f3, width = 400)
 }
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmp5nJYII/file1ece7c0ec528.png&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpk9ORpp/file161383bfd36.png&quot;
 </code></pre>
 <pre><code class="language-r">unlink(c(f1, f2, f3))
 </code></pre>
@@ -1357,11 +1357,11 @@ step with the box.</p>
 first one is used initially. Paging shows that many of the filtered and
 sorted rows at a time, with a pager (first, previous, next, last), the row
 range, and (for more than one size) a selector below the table. <code>Inf</code> is a
-valid size (every row on one page), offered as <code>∞</code> in the selector. The
-selector is omitted when the table has no more rows than the smallest page
-size (no size would split it), though the pager's nav and row-count readout
-stay, the latter being useful as a filter narrows the rows. Use <code>FALSE</code> or
-<code>NULL</code> to show all rows with no pager at all.</p>
+valid size (every row on one page), offered as an infinity symbol in the
+selector. The selector is omitted when the table has no more rows than the
+smallest page size (no size would split it), though the pager's nav and
+row-count readout stay, the latter being useful as a filter narrows the
+rows. Use <code>FALSE</code> or <code>NULL</code> to show all rows with no pager at all.</p>
 </td></tr>
 <tr><td><code>resize</code></td>
 <td>
