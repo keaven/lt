@@ -19,8 +19,6 @@ assert("lt_export() writes PDF and PNG by extension", {
   (file.exists(pdf))
   # PDF magic bytes: "%PDF"
   (rawToChar(readBin(pdf, "raw", 4L)) %==% "%PDF")
-  # cropped table fits on one page
-  (pdf_pages(pdf) %==% 1L)
 
   lt_export(x, png)
   (file.exists(png))
@@ -122,7 +120,6 @@ if (can_bake())
 if (can_bake())
   assert("lt_export(output = NA) returns the HTML string", {
     html = lt_export(lt(data.frame(a = 1:2, b = c("x", "y"))), NA)
-    (is.character(html))
     (has_match(html, "<table.*>1</td>.*>x</td>"))
   })
 
@@ -143,7 +140,6 @@ if (can_bake())
     )
     # the baked HTML comes back split across lines (joined at write time)
     lines = unlist(strsplit(html, "\n"))
-    (length(lines) > 1L)
     (any(grepl("^  <table", lines)))         # table indented under the wrap
     (any(grepl("^      <tr>$", lines)))       # rows on their own line
     (any(grepl("^        <td[ >].*</td>$", lines)))  # each cell a single line

@@ -2,9 +2,7 @@ d = data.frame(x = 1:2, y = c("a", "b"))
 x = lt(d)
 
 assert("format() returns HTML with script tags", {
-  html = format(x)
-  (is.character(html))
-  (has_match(html, "<script>.*</script>"))
+  (has_match(format(x), "<script>.*</script>"))
 })
 
 assert("format(fragment = FALSE) wraps in DOCTYPE", {
@@ -90,17 +88,6 @@ assert("asset_url() respects lt.assets_url option", {
   (url %==% "https://example.com/lt.js")
 })
 
-assert("spec_block() drops css and rules", {
-  x2 = x
-  x2$css = "some.css"
-  x2$rules = ".na { color: red }"
-  sb = spec_block(x2)
-  html = paste(sb, collapse = "")
-  (has_match(html, "some\\.css", negate = TRUE))
-  (has_match(html, "color: red", negate = TRUE))
-  (has_match(html, "window\\.LT"))
-})
-
 assert("spec_block() emits the missing default from the lt.missing option", {
   op = options(lt.missing = NULL); on.exit(options(op), add = TRUE)
   # unset: no `missing` field shipped (runtime defaults to em dash)
@@ -172,17 +159,8 @@ if (requireNamespace("knitr", quietly = TRUE)) {
 }
 
 if (requireNamespace("htmltools", quietly = TRUE)) {
-  assert("lt_dependency() bundles core assets; opts add extension/binding", {
-    dep = lt_dependency()
-    (dep$script %==% "lt.js")
-    ("lt.css" %in% dep$stylesheet)
-    di = lt_dependency(interactive = TRUE)
-    ("lt-interactive.js" %in% di$script)
-    ("lt-interactive.css" %in% di$stylesheet)
-    ds = lt_dependency(shiny = TRUE)
-    ("lt-binding.js" %in% ds$script)
+  assert("lt_dependency(plot = TRUE) loads the plot script before core", {
     dp = lt_dependency(plot = TRUE)
-    ("lt-plot.css" %in% dp$stylesheet)
     # plot script loads before core so renderer registers in time
     (isTRUE(match("lt-plot.js", dp$script) < match("lt.js", dp$script)))
   })

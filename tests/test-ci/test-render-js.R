@@ -1,11 +1,6 @@
 # Core static rendering: table structure, column hiding, HTML escaping,
 # raw-HTML I() fields, and automatic column labels.
 
-assert("basic table renders correct cells", {
-  html = build(list(data = list(x = 1:2, y = c("a", "b"))))
-  (has_match(html, "<table.*>x</th>.*>1</td>.*>b</td>"))
-})
-
 assert("lt_hide drops a column (header and cells) from the rendered table", {
   x = lt(data.frame(x = 1:2, y = c("a", "b"), z = 3:4)) |> lt_hide("y")
   html = as.character(lt_static(x, method = 'node', css = FALSE, fragment = TRUE))

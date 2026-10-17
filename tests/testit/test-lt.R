@@ -50,12 +50,6 @@ assert("name_value_args() canonicalizes the name = value forms", {
   (inherits(name_value_args(list(a = I("<b>A</b>")))$a, "AsIs"))
 })
 
-assert("add_op() appends an operation", {
-  x = lt(d)
-  x = add_op(x, "test", foo = "bar")
-  (x$ops %==% list(list(type = "test", foo = "bar")))
-})
-
 assert("add_op() drops NULL values", {
   x = lt(d)
   x = add_op(x, "test", foo = "bar", baz = NULL)

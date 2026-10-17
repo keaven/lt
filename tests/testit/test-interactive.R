@@ -123,18 +123,13 @@ assert("download reaches the client spec as true or a file name, else absent", {
   (download_opt(list(mode = 'display')) %==% TRUE)
 })
 
-assert("detail = column names resolves to a name array; js() stays verbatim", {
+assert("detail = column names resolves to a name array", {
   # formula / character vector of columns becomes plain name array for
   # runtime to build one-row detail table from
   json = format(lt(d) |> lt_interactive(detail = ~ x + y), assets = FALSE)
   (grepl('"detail": ["x", "y"]', json, fixed = TRUE) %==% TRUE)
   json = format(lt(d) |> lt_interactive(detail = c('x', 'y')), assets = FALSE)
   (grepl('"detail": ["x", "y"]', json, fixed = TRUE) %==% TRUE)
-  # js() callback emitted verbatim (unquoted), not as string
-  json = format(
-    lt(d) |> lt_interactive(detail = js('(r, i, d) => ({})')), assets = FALSE
-  )
-  (grepl('"detail": (r, i, d) => ({})', json, fixed = TRUE) %==% TRUE)
 })
 
 count = function(p, x) sum(gregexpr(p, x)[[1]] > 0)

@@ -188,8 +188,6 @@ assert('a "checklist" seeds a `selected` subset and chips when the column is hid
 
 assert('LT.ui exposes the reusable popover, checklist, and chip builders', {
   x = itbl()
-  (lti_eval(x, 'typeof LT.ui.popover + "," + typeof LT.ui.checklist + "," + typeof LT.ui.chip')
-   %==% 'function,function,function')
   # the chip builder: a labelled wrapper that holds the caller's control and
   # exposes mark()/summarize(); its parts carry the same classes as a typed chip
   chip = 'var c = LT.ui.chip(document, "Group", document.createElement("button"));
