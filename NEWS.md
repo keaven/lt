@@ -1,3 +1,6 @@
+# CHANGES IN lt VERSION 0.6
+
+
 # CHANGES IN lt VERSION 0.5
 
 - Added `lt_interactive()` to make a table interactive in the browser: click-to-sort headers, a search box, per-column filters (plain, or typed dropdown/range/checklist widgets), pagination, column resizing, a column-visibility menu, expandable row detail, and a CSV download of the current view. Everything runs client-side via an extension loaded only for opted-in tables, and sorting and filtering stay within each row group or subtree.

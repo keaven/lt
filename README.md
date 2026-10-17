@@ -9,7 +9,8 @@
 
 <!-- badges: end -->
 
-Lightweight tables for R, inspired by [gt](https://gt.rstudio.com).
+Lightweight tables for R, inspired by [**gt**](https://gt.rstudio.com) and
+[**DT**](https://github.com/rstudio/DT).
 
 **lt** provides a small grammar of tables that covers the structure most reports
 need — titles, column spanners, row groups, footnotes, and number formatting —
@@ -209,4 +210,6 @@ This package was written with the help of Claude Code. **lt** is directly
 inspired by **gt** by Rich Iannone and the RStudio/Posit team. The grammar of
 tables that **gt** pioneered — layering titles, spanners, footnotes, and
 formatters onto a data frame — is a great idea; **lt** aims to provide a minimal
-re-implementation for contexts where a lighter footprint is preferred.
+re-implementation for contexts where a lighter footprint is preferred. Its
+interactive features (sorting, searching, paging) were inspired by **DT**, which I
+developed with collaborators.
