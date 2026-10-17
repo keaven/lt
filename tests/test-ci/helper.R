@@ -1,8 +1,7 @@
 build = function(spec) {
   x = structure(spec, class = 'lt_tbl')
-  # collapse to one string: a multi-value cell <title> embeds "\n" between
-  # entries, which would otherwise split the (single-line) HTML into a vector
-  # and hide anything after it (e.g. the footer legend) from count_str().
+  # one string: a multi-value cell <title> embeds "\n", which would split the
+  # HTML into a vector and hide later parts (e.g. footer legend) from count_str()
   paste(as.character(lt_static(x, method = 'node', css = FALSE, fragment = TRUE)),
     collapse = '\n')
 }
@@ -81,17 +80,15 @@ by = function(...) list(sort = list(...))
 # End-to-end in a headless browser: the extension must find the table lt.js
 # already mounted, wire the controls, and re-render <tbody> on interaction.
 
-# Reuse one headless Chrome across all probes (navigate per call) instead of
-# launching chromium per probe. Created lazily, closed when R exits. Falls back
-# to the one-shot dump only where chromote is unavailable.
+# One headless Chrome shared across probes (navigate per call). Created lazily,
+# closed on R exit. Falls back to one-shot dump without chromote.
 .browser = new.env(parent = emptyenv())
 
 lti_session = function() {
   if (is.null(.browser$b)) {
-    # give Chrome a private temp dir so its scratch files (com.google.Chrome.*)
-    # land there and are deleted with it, not left to trip R CMD check's
-    # detritus NOTE (chromote launches its own browser, so xfun's browser
-    # helpers don't cover this one)
+    # private temp dir so Chrome's scratch files (com.google.Chrome.*) are
+    # deleted with it, not left to trip R CMD check's detritus NOTE (xfun's
+    # browser helpers don't cover chromote)
     .browser$tmp = tempfile('lt-chrome-'); dir.create(.browser$tmp)
     old = xfun::set_envvar(c(TMPDIR = .browser$tmp))
     .browser$b = chromote::ChromoteSession$new()
@@ -104,8 +101,8 @@ lti_session = function() {
   .browser$b
 }
 
-# data-ready is set only after data-out, so an empty data-out (a legitimate
-# result, e.g. no rows) is not mistaken for "not loaded yet"
+# data-ready is set after data-out, so an empty data-out (e.g. no rows) isn't
+# mistaken for "not loaded yet"
 lti_eval_cdp = function(f) {
   b = lti_session()
   b$Page$navigate(paste0('file://', normalizePath(f)), wait_ = FALSE)
@@ -125,10 +122,9 @@ lti_eval_dump = function(f) {
   m[2]
 }
 
-# Render `x`, run `js` once the page has loaded (with the table element bound to
-# `t`), then read `expr` back: the browser stamps it on <body> and we read it
-# back. All assets are inlined, so lt.js builds the table and lt-interactive.js
-# enhances it before the load event fires.
+# Render `x`, run `js` after load (table element bound to `t`), then read `expr`
+# back from <body>, where the browser stamps it. Assets are inlined, so lt.js
+# and lt-interactive.js finish before the load event.
 lti_eval = function(x, expr, js = '') {
   code = sprintf(
     'var t = document.querySelector(".lt-table");%s;document.body.dataset.out = (%s);document.body.dataset.ready = "1"',

@@ -84,14 +84,14 @@ add_op = function(x, type, ...) {
 
 camel2dash = function(x) gsub('([A-Z])', '-\\L\\1', x, perl = TRUE)
 
-# Canonicalize a `...`-style name = value mapping into a named list. Three forms
-# produce the same result:
+# Canonicalize a `...`-style name = value mapping into a named list. Three
+# forms give the same result:
 #   f(a = 1, b = 2)               # named arguments
 #   f(c(a = 1, b = 2))            # a single named vector or list
 #   f(list(c("a", "b"), c(1, 2))) # a single list(names, values) of two parallel
 #                                 #   vectors
-# Any other `...` is returned unchanged, so a caller's own unnamed-argument
-# handling still sees it.
+# Any other `...` is returned unchanged for the caller's own unnamed-argument
+# handling.
 name_value_args = function(...) {
   args = list(...)
   if (length(args) != 1 || !is.null(names(args))) return(args)
@@ -102,20 +102,20 @@ name_value_args = function(...) {
   args
 }
 
-# Set names, and optionally coerce x to list (as.list() would drop class of x's
-# values, e.g. I(), so lapply() instead)
+# Set names, optionally coercing x to list (as.list() would drop the class of
+# x's values, e.g. I(), so lapply() instead)
 set_names = function(x, nm, to_list = FALSE) {
   if (to_list) x = lapply(seq_along(x), function(i) x[i])
   names(x) = nm
   x
 }
 
-# Resolve a column selection to column names. `cols` may be:
-# - a one-sided formula; if its right-hand side references the pronoun `.`
-#   (the character vector of column names), it is evaluated as a predicate and
-#   a logical result selects the matching names (a character result is used
-#   as-is), e.g. `~ endsWith(., '_time')` or `~ grep('_x$', ., value = TRUE)`;
-#   otherwise the bare variable names on the RHS are taken, e.g. `~ a + b`;
+# Resolve a column selection to names. `cols` may be:
+# - a one-sided formula; if its RHS references the pronoun `.` (the column
+#   names), it is evaluated as a predicate: logical selects matching names,
+#   character is used as-is, e.g. `~ endsWith(., '_time')` or
+#   `~ grep('_x$', ., value = TRUE)`; otherwise the bare RHS variable names are
+#   taken, e.g. `~ a + b`;
 # - a character vector of column names;
 # - integer positions (resolved against `names(data)` when `data` is supplied).
 f_cols = function(cols, data = NULL) {

@@ -1,9 +1,9 @@
-# Shiny bindings — htmlDependency + custom output binding (no renderUI).
+# Shiny bindings: htmlDependency + custom output binding (no renderUI).
 #
-# lt_output() returns a placeholder <div class="lt-output"> plus the lt CSS,
-# the lt runtime, and an output binding. render_lt() ships a `{ spec }`
-# payload via shiny::markRenderFunction(); the binding receives the spec
-# and calls LT.build(spec) to swap in the <table>.
+# lt_output() returns a placeholder <div class="lt-output"> plus lt CSS, the
+# runtime, and an output binding. render_lt() ships a `{ spec }` payload via
+# shiny::markRenderFunction(); the binding calls LT.build(spec) to swap in the
+# <table>.
 
 #' HTML dependency for lt tables
 #'
@@ -60,8 +60,8 @@ lt_dependency = function(interactive = FALSE, plot = FALSE, shiny = FALSE)
 #' }
 #' shinyApp(ui, server)
 #' }
-# Ship the graphics module too: render_lt()'s spec is produced on the server at
-# render time, so the UI cannot know whether it will contain a plot cell.
+# Ship the graphics module too: render_lt()'s spec is built at render time, so
+# the UI can't know whether it has a plot cell.
 lt_output = function(outputId, ...) shiny::tagList(
   lt_dependency(plot = TRUE, shiny = TRUE),
   shiny::div(id = outputId, class = 'lt-output')
@@ -73,9 +73,9 @@ render_lt = function(expr, env = parent.frame(), quoted = FALSE) {
   func = shiny::installExprFunction(expr, 'func', env, quoted)
   shiny::createRenderFunction(func, function(result, shinysession, name, ...) {
     if (is.null(result)) return(NULL)
-    # Wire format: list of {href} or {content} items. Absolute file paths
-    # are inlined — file:// would resolve against the client's filesystem,
-    # not the Shiny server. URLs and relative paths ride as hrefs.
+    # Wire format: list of {href} or {content} items. Absolute file paths are
+    # inlined (file:// would resolve on the client, not the Shiny server).
+    # URLs and relative paths ride as hrefs.
     if (length(result$css)) result$css = lapply(result$css, function(p) {
       if (is_url(p) || !xfun::is_abs_path(p)) list(href = p)
       else list(content = xfun::file_string(p))

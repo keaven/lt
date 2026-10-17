@@ -19,7 +19,7 @@ assert("lt_export() writes PDF and PNG by extension", {
   (file.exists(pdf))
   # PDF magic bytes: "%PDF"
   (rawToChar(readBin(pdf, "raw", 4L)) %==% "%PDF")
-  # A cropped table fits on a single page.
+  # cropped table fits on one page
   (pdf_pages(pdf) %==% 1L)
 
   lt_export(x, png)
@@ -28,10 +28,8 @@ assert("lt_export() writes PDF and PNG by extension", {
   (readBin(png, "raw", 4L) %==% as.raw(c(0x89, 0x50, 0x4e, 0x47)))
 })
 
-# A taller/wider table (more rows than the PDF measurement used to account
-# for) must still crop to one page: the table's caption border and footer
-# spacing extend past the table's own border-box, so we measure the body's
-# scroll size, not the table box.
+# Taller table must still crop to one page: caption border and footer spacing
+# extend past the table's border-box, so measure the body's scroll size.
 assert("lt_export() crops a large table to one PDF page", {
   x = lt(head(iris, 20))
   pdf = tempfile(fileext = ".pdf")
@@ -40,13 +38,11 @@ assert("lt_export() crops a large table to one PDF page", {
   (pdf_pages(pdf) %==% 1L)
 })
 
-# A wide table must crop to one page too. scrollWidth is the floor of the
-# table's fractional natural width; pinning the body to that floored width
-# used to leave it a sub-pixel too narrow, wrapping a cell and growing the
-# table past the measured height, so the PDF spilled onto a second page
-# (seen on macOS, not Linux). lt_measure() now rounds the width up by 1px.
+# Wide table must crop to one page. scrollWidth floors the fractional width;
+# pinning to it left the body sub-pixel too narrow, wrapping a cell and
+# spilling onto a second page (macOS only). lt_measure() rounds up by 1px.
 assert("lt_export() crops a wide table to one PDF page", {
-  # Many columns with long labels give the table a fractional natural width.
+  # many long labels give a fractional natural width
   x = lt(as.data.frame(matrix(
     1:32, 4, 8, dimnames = list(NULL, paste0("a_long_column_label_", 1:8))
   )))
@@ -56,12 +52,10 @@ assert("lt_export() crops a wide table to one PDF page", {
   (pdf_pages(pdf) %==% 1L)
 })
 
-# A table whose rendered height is fractional must crop to one page too.
-# scrollHeight is rounded to an integer, and the 0.85em footer text makes the
-# body a fraction of a pixel taller than that (e.g., 316.39px with two footnote
-# rows), so a page box of exactly scrollHeight px overflowed and Chromium added
-# a second page holding the repeated <thead> and the <tfoot> (seen on macOS).
-# lt_measure() now rounds the height up by 1px as well.
+# Fractional height must crop to one page. scrollHeight is rounded, but the
+# 0.85em footer makes the body slightly taller (e.g., 316.39px), so a page box
+# of exactly scrollHeight overflowed to a second page (macOS only).
+# lt_measure() rounds up by 1px too.
 assert("lt_export() crops a table with a fractional height to one PDF page", {
   x = lt(head(mtcars)) |>
     lt_footnote("Source: 1974 Motor Trend US magazine.", "title") |>
@@ -85,9 +79,8 @@ if (xfun::loadable("magick"))
     (info$height %==% d[2L])
   })
 
-# A relative user-CSS path must still apply when lt_export() renders from its
-# temporary directory: lt_export() absolutizes existing local files for the
-# render, so a stylesheet given as a bare relative name is not silently dropped.
+# Relative user-CSS path must still apply when rendering from the temp
+# directory: lt_export() absolutizes existing local files.
 if (xfun::loadable("magick"))
   assert("lt_export() applies a relative user-CSS path", {
     d = tempfile(); dir.create(d)
