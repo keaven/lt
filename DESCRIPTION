@@ -7,7 +7,7 @@ Authors@R: person('Yihui', 'Xie', email = 'xie@yihui.name', role = c('aut', 'cre
 Description: A lightweight grammar of tables. Build a table by declaring a JSON
     spec (titles, spanners, row groups, footnotes, formatting functions, etc.); a tiny
     vanilla JavaScript runtime builds the HTML table from the spec on page
-    load. Cells can hold inline plots (error bars, sparklines, dot plots) drawn
+    load. Cells can hold inline plots (error bars, dot plots, mini line and bar charts) drawn
     as SVG in the browser from the numbers alone. Tables can optionally be made
     interactive (sorting, searching, filtering, pagination, column hiding,
     expandable row detail, and CSV download) via a separate extension loaded
