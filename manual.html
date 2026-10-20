@@ -462,7 +462,7 @@ Its script loads before the core runtime so plot cells render.</p>
 </code></pre>
 <pre><code>#&gt; List of 10
 #&gt;  $ name      : chr &quot;lt&quot;
-#&gt;  $ version   : chr &quot;0.5.1&quot;
+#&gt;  $ version   : chr &quot;0.5.2&quot;
 #&gt;  $ src       :List of 1
 #&gt;   ..$ file: chr &quot;/Users/runner/work/_temp/Library/lt/www&quot;
 #&gt;  $ meta      : NULL
@@ -844,7 +844,7 @@ HTML but cannot run JavaScript (e.g., GitHub Flavored Markdown).
 f1 = tempfile(fileext = '.html')
 lt_export(tbl, f1, method = 'raw')  # file output
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpp1dndx/filee5a186a2886.html&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpUHDgFx/fileb266c928300.html&quot;
 </code></pre>
 <pre><code class="language-r"># Bake a static &lt;table&gt; (needs Node.js or a headless browser).
 if (lt:::can_bake())
@@ -953,12 +953,12 @@ if (lt:::can_bake())
 <pre><code class="language-r"># PDF / PNG are rendered in a headless browser and cropped to the table.
 f2 = tempfile(fileext = '.pdf')
 f3 = tempfile(fileext = '.png')
-if (lt:::has_browser()) {
+if (lt:::has_browser(pdf = TRUE)) {
   lt_export(tbl, f2)
   lt_export(tbl, f3, width = 400)
 }
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpp1dndx/filee5a4f7308b8.png&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpUHDgFx/fileb266f3eb954.png&quot;
 </code></pre>
 <pre><code class="language-r">unlink(c(f1, f2, f3))
 </code></pre>
