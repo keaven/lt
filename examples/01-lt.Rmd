@@ -17,8 +17,8 @@ output:
 
 ## The cheat sheet (table) {#sec:cheatsheet}
 
-The table below is a self-documenting cheat sheet: every function in this
-package is used to build it, and each function's name is placed where
+The table below is a self-documenting cheat sheet: many functions in this
+package are used to build it, and each function's name is placed where
 that function acts. The title reads `lt_header(title = ...)` because
 `lt_header()` put it there; every column header is the name of the function
 that shaped that column; the row-group label is `lt_group()`; the footnote text
@@ -35,11 +35,11 @@ d = data.frame(
   Date  = as.Date(c("2024-01-15", "2024-02-20", "2024-03-25", "2024-04-30")),
   Align = c(1, 22, 333, 4),
   Width = c("lt_width()", "sets", "column", "widths"),
-  Est   = c("0.61", "0.79", "0.45", "0.90"),
-  CI    = c("(0.40, 0.82)", "(0.57, 1.01)", "(0.20, 0.70)", "(0.71, 1.14)"),
-  Eff   = c(0.12, -0.34, 0.45, -0.08),
-  EffLo = c(-0.05, -0.52, 0.21, -0.29),
-  EffHi = c(0.29, -0.16, 0.69, 0.13)
+  Est   = c("0.6", "0.8", "0.5", "0.9"),
+  CI    = c("(0.4, 0.8)", "(0.6, 1.0)", "(0.2, 0.7)", "(0.7, 1.1)"),
+  Eff   = c(0.1, -0.3, 0.4, -0.1),
+  EffLo = c(-0.1, -0.4, 0.2, -0.3),
+  EffHi = c(0.3, -0.2, 0.6, 0.1)
 )
 
 library(lt)
@@ -62,7 +62,7 @@ tbl_cheat = lt(d, auto_format = FALSE) |>
     Align = "lt_align()", Est = "lt_merge()", Eff = "lt_errorbar()"
   ) |>
   # lt_errorbar(): draw an inline forest plot in the "lt_errorbar()" column
-  lt_errorbar(Eff ~ EffLo + EffHi, ref = 0, width = 100) |>
+  lt_errorbar(Eff ~ EffLo + EffHi, ref = 0, width = 80) |>
   # lt_html(): render the "Label" column as raw HTML (note the link in row 1)
   lt_html(~ Label) |>
   # lt_align(): center the "lt_align()" column
@@ -73,7 +73,7 @@ tbl_cheat = lt(d, auto_format = FALSE) |>
   lt_format(~ Fmt, decimals = 1, big_mark = ",") |>
   # lt_date(): format the "lt_date()" column
   lt_date(~ Date, options = list(
-    year = "numeric", month = "short", day = "numeric", timeZone = "UTC"
+    month = "short", day = "numeric", timeZone = "UTC"
   )) |>
   # lt_sub(): NA/zero/small are replaced with self-naming placeholders
   lt_sub(~ Sub, missing = "n/a", zero = "—",
