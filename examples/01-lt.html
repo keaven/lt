@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.11.8">
+<meta name="generator" content="litedown 0.11.10">
 <title>An Introduction to lt</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/default.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/article.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/copy-button.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/heading-anchor.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/pages.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/site.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/key-buttons.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/prism-xcode.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/article.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/copy-button.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/heading-anchor.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/pages.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/site.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/key-buttons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/prism-xcode.min.css">
 </head>
 <body>
 <nav><p><a href="../index.html">Home</a>
@@ -189,27 +189,29 @@ tbl_cheat = lt(d, auto_format = FALSE) |&gt;
   lt_note(&quot;lt_note() — and lt_export() saves this table to HTML/PDF/PNG.&quot;)
 tbl_cheat
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/lt.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/lt-plot.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/lt.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/lt-plot.min.css">
 <style>.lt-table {
   .highlight { font-weight: bold; color: #c60; }
 }</style>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["a94ed67b"]=
+{
+  "Grp": ["Group A", "Group A", "Group B", "Group B"],
+  "Label": ["<a href='#sec:cheatsheet'>lt(): make a table</a>", "lt_indent(): child A", "lt_indent(): child B", "lt_style() + lt_css()"],
+  "Fmt": [1234567.89, -0.51234, Infinity, -Infinity],
+  "Sub": [0, null, 3.14, 2e-04],
+  "Date": [new Date("2024-01-15"), new Date("2024-02-20"), new Date("2024-03-25"), new Date("2024-04-30")],
+  "Align": [1, 22, 333, 4],
+  "Width": ["lt_width()", "sets", "column", "widths"],
+  "Est": ["0.6", "0.8", "0.5", "0.9"],
+  "CI": ["(0.4, 0.8)", "(0.6, 1.0)", "(0.2, 0.7)", "(0.7, 1.1)"],
+  "Eff": [0.1, -0.3, 0.4, -0.1],
+  "EffLo": [-0.1, -0.4, 0.2, -0.3],
+  "EffHi": [0.3, -0.2, 0.6, 0.1]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Grp": ["Group A", "Group A", "Group B", "Group B"],
-    "Label": ["<a href='#sec:cheatsheet'>lt(): make a table</a>", "lt_indent(): child A", "lt_indent(): child B", "lt_style() + lt_css()"],
-    "Fmt": [1234567.89, -0.51234, Infinity, -Infinity],
-    "Sub": [0, null, 3.14, 2e-04],
-    "Date": [new Date("2024-01-15"), new Date("2024-02-20"), new Date("2024-03-25"), new Date("2024-04-30")],
-    "Align": [1, 22, 333, 4],
-    "Width": ["lt_width()", "sets", "column", "widths"],
-    "Est": ["0.6", "0.8", "0.5", "0.9"],
-    "CI": ["(0.4, 0.8)", "(0.6, 1.0)", "(0.2, 0.7)", "(0.7, 1.1)"],
-    "Eff": [0.1, -0.3, 0.4, -0.1],
-    "EffLo": [-0.1, -0.4, 0.2, -0.3],
-    "EffHi": [0.3, -0.2, 0.6, 0.1]
-  },
   "ops": [
     {
       "type": "merge",
@@ -345,32 +347,36 @@ tbl_cheat
   ],
   "notes": [
     "lt_note() — and lt_export() saves this table to HTML/PDF/PNG."
-  ]
+  ],
+  "data_key": "a94ed67b"
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/lt-plot.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/lt.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/lt-plot.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/lt.min.js" defer></script>
 <h2 id="sec:basics"><span class="section-number main-number">2</span> Basics</h2>
 <h3 id="sec:a-simple-table"><span class="section-number">2.1</span> A simple table</h3>
 <p>Pass any data frame to <code>lt()</code>:</p>
 <pre><code class="language-r">tbl_cars = lt(head(mtcars))
 tbl_cars
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["8a8e7bff"]=
+{
+  "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
+  "cyl": [6, 6, 4, 6, 8, 6],
+  "disp": [160, 160, 108, 258, 360, 225],
+  "hp": [110, 110, 93, 110, 175, 105],
+  "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
+  "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
+  "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
+  "vs": [0, 0, 1, 1, 0, 1],
+  "am": [1, 1, 1, 0, 0, 0],
+  "gear": [4, 4, 4, 3, 3, 3],
+  "carb": [4, 4, 1, 1, 2, 1]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  }
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h3 id="sec:column-labels"><span class="section-number">2.2</span> Column labels</h3>
@@ -380,42 +386,32 @@ tbl_cars
 <pre><code class="language-r">tbl_iris = lt(head(iris))
 tbl_iris
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["e81b2918"]=
+{
+  "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
+  "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
+  "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
+  "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
+  "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  }
+  "data_key": "e81b2918"
 }
 })</script>
 <pre><code class="language-r">lt(head(iris), auto_label = FALSE)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
-  "auto_label": false
+  "auto_label": false,
+  "data_key": "e81b2918"
 }
 })</script>
 <pre><code class="language-r">tbl_iris |&gt; lt_label(Sepal.Length = &quot;Length (cm)&quot;, Sepal.Width = &quot;Width (cm)&quot;)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "label",
@@ -424,7 +420,8 @@ tbl_iris
         "Sepal.Width": "Width (cm)"
       }
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h3 id="sec:title-and-subtitle"><span class="section-number">2.3</span> Title and subtitle</h3>
@@ -433,17 +430,11 @@ tbl_iris
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "header": {
     "title": "Iris Measurements",
     "subtitle": "First six observations"
-  }
+  },
+  "data_key": "e81b2918"
 }
 })</script>
 <h3 id="sec:column-alignment"><span class="section-number">2.4</span> Column alignment</h3>
@@ -453,19 +444,6 @@ left-aligned. Override with <code>lt_align()</code>:</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  },
   "ops": [
     {
       "type": "align",
@@ -478,7 +456,8 @@ left-aligned. Override with <code>lt_align()</code>:</p>
         "mpg": "6em"
       }
     }
-  ]
+  ],
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h2 id="sec:formatting"><span class="section-number main-number">3</span> Formatting</h2>
@@ -496,25 +475,24 @@ year-like columns. Set <code>auto_format = FALSE</code> to display raw values:</
 )
 lt(d)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["f29236c2"]=
+{
+  "Year": [2020, 2021, 2022],
+  "Revenue": [1234567.89, 2345678.12, -3456.789],
+  "Margin_pct": [0.1234, 0.0567, 0.2345]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Year": [2020, 2021, 2022],
-    "Revenue": [1234567.89, 2345678.12, -3456.789],
-    "Margin_pct": [0.1234, 0.0567, 0.2345]
-  }
+  "data_key": "f29236c2"
 }
 })</script>
 <pre><code class="language-r">lt(d, auto_format = FALSE)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Year": [2020, 2021, 2022],
-    "Revenue": [1234567.89, 2345678.12, -3456.789],
-    "Margin_pct": [0.1234, 0.0567, 0.2345]
-  },
-  "auto_format": false
+  "auto_format": false,
+  "data_key": "f29236c2"
 }
 })</script>
 <h3 id="sec:number-formatting"><span class="section-number">3.2</span> Number formatting</h3>
@@ -522,26 +500,14 @@ lt(d)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  },
   "ops": [
     {
       "type": "fmt_number",
       "columns": ["mpg", "disp"],
       "decimals": 1
     }
-  ]
+  ],
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h4 id="sec:decimal-places"><span class="section-number">3.2.1</span> Decimal places</h4>
@@ -554,20 +520,23 @@ lt(d)
 lt(d) |&gt;
   lt_format(~ Q1 + Q2, decimals = 2)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["7b06175a"]=
+{
+  "Metric": ["Revenue", "Costs", "Profit"],
+  "Q1": [1234567.891, 987654.321, 246913.57],
+  "Q2": [1345678.912, 1012345.678, 333333.234]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Metric": ["Revenue", "Costs", "Profit"],
-    "Q1": [1234567.891, 987654.321, 246913.57],
-    "Q2": [1345678.912, 1012345.678, 333333.234]
-  },
   "ops": [
     {
       "type": "fmt_number",
       "columns": ["Q1", "Q2"],
       "decimals": 2
     }
-  ]
+  ],
+  "data_key": "7b06175a"
 }
 })</script>
 <h4 id="sec:significant-digits"><span class="section-number">3.2.2</span> Significant digits</h4>
@@ -581,19 +550,22 @@ of meaningful digits:</p>
 )
 lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["406b27d0"]=
+{
+  "Particle": ["Electron", "Proton", "Alpha"],
+  "Mass": [0.00054858, 1.00727647, 4.00150618]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Particle": ["Electron", "Proton", "Alpha"],
-    "Mass": [0.00054858, 1.00727647, 4.00150618]
-  },
   "ops": [
     {
       "type": "fmt_number",
       "columns": ["Mass"],
       "sig_digits": 3
     }
-  ]
+  ],
+  "data_key": "406b27d0"
 }
 })</script>
 <p><code>sig_digits</code> cannot be combined with <code>decimals</code>.</p>
@@ -603,11 +575,6 @@ lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Metric": ["Revenue", "Costs", "Profit"],
-    "Q1": [1234567.891, 987654.321, 246913.57],
-    "Q2": [1345678.912, 1012345.678, 333333.234]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -615,7 +582,8 @@ lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
       "decimals": 0,
       "big_mark": ","
     }
-  ]
+  ],
+  "data_key": "7b06175a"
 }
 })</script>
 <h4 id="sec:prefix-and-suffix-currency-units"><span class="section-number">3.2.4</span> Prefix and suffix (currency, units)</h4>
@@ -625,11 +593,6 @@ lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Metric": ["Revenue", "Costs", "Profit"],
-    "Q1": [1234567.891, 987654.321, 246913.57],
-    "Q2": [1345678.912, 1012345.678, 333333.234]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -638,7 +601,8 @@ lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
       "big_mark": ",",
       "prefix": "$"
     }
-  ]
+  ],
+  "data_key": "7b06175a"
 }
 })</script>
 <pre><code class="language-r">d2 = data.frame(
@@ -647,12 +611,14 @@ lt(d3) |&gt; lt_format(~ Mass, sig_digits = 3)
 )
 lt(d2) |&gt; lt_format(~ Weight, decimals = 1, suffix = &quot; kg&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["b18ad765"]=
+{
+  "Material": ["Steel", "Aluminum", "Copper"],
+  "Weight": [1250, 340.5, 89.12]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Material": ["Steel", "Aluminum", "Copper"],
-    "Weight": [1250, 340.5, 89.12]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -660,7 +626,8 @@ lt(d2) |&gt; lt_format(~ Weight, decimals = 1, suffix = &quot; kg&quot;)
       "decimals": 1,
       "suffix": " kg"
     }
-  ]
+  ],
+  "data_key": "b18ad765"
 }
 })</script>
 <h3 id="sec:date-formatting"><span class="section-number">3.3</span> Date formatting</h3>
@@ -676,18 +643,21 @@ displays as <code>2024-01-14</code> at GMT-6. Pass <code>options = list(timeZone
 )
 lt(d) |&gt; lt_date(~ Date)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["45f14e91"]=
+{
+  "Event": ["Launch", "Update", "Release"],
+  "Date": [new Date("2024-01-15"), new Date("2024-06-30"), new Date("2024-12-01")]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Event": ["Launch", "Update", "Release"],
-    "Date": [new Date("2024-01-15"), new Date("2024-06-30"), new Date("2024-12-01")]
-  },
   "ops": [
     {
       "type": "fmt_date",
       "columns": ["Date"]
     }
-  ]
+  ],
+  "data_key": "45f14e91"
 }
 })</script>
 <h4 id="sec:with-locale-and-options"><span class="section-number">3.3.1</span> With locale and options</h4>
@@ -698,10 +668,6 @@ lt(d) |&gt; lt_date(~ Date)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Event": ["Launch", "Update", "Release"],
-    "Date": [new Date("2024-01-15"), new Date("2024-06-30"), new Date("2024-12-01")]
-  },
   "ops": [
     {
       "type": "fmt_date",
@@ -715,7 +681,8 @@ lt(d) |&gt; lt_date(~ Date)
         "timeZone": "UTC"
       }
     }
-  ]
+  ],
+  "data_key": "45f14e91"
 }
 })</script>
 <h4 id="sec:using-a-specific-date-method"><span class="section-number">3.3.2</span> Using a specific Date method</h4>
@@ -723,17 +690,14 @@ lt(d) |&gt; lt_date(~ Date)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Event": ["Launch", "Update", "Release"],
-    "Date": [new Date("2024-01-15"), new Date("2024-06-30"), new Date("2024-12-01")]
-  },
   "ops": [
     {
       "type": "fmt_date",
       "columns": ["Date"],
       "method": "toDateString"
     }
-  ]
+  ],
+  "data_key": "45f14e91"
 }
 })</script>
 <h4 id="sec:datetime-posixt-columns"><span class="section-number">3.3.3</span> Datetime (POSIXt) columns</h4>
@@ -747,12 +711,14 @@ lt(d) |&gt; lt_date(~ Time, locale = &quot;en-US&quot;, options = list(
   hour = &quot;2-digit&quot;, minute = &quot;2-digit&quot;
 ))
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["2c7c99f8"]=
+{
+  "Event": ["Start", "End"],
+  "Time": [new Date("2024-01-15 09:30:00"), new Date("2024-01-15 17:45:00")]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Event": ["Start", "End"],
-    "Time": [new Date("2024-01-15 09:30:00"), new Date("2024-01-15 17:45:00")]
-  },
   "ops": [
     {
       "type": "fmt_date",
@@ -766,7 +732,8 @@ lt(d) |&gt; lt_date(~ Time, locale = &quot;en-US&quot;, options = list(
         "minute": "2-digit"
       }
     }
-  ]
+  ],
+  "data_key": "2c7c99f8"
 }
 })</script>
 <h3 id="sec:substituting-missing-small-values"><span class="section-number">3.4</span> Substituting missing/small values</h3>
@@ -778,12 +745,14 @@ lt(d) |&gt;
   lt_format(~ Value, decimals = 2) |&gt;
   lt_sub(~ Value, missing = &quot;n/a&quot;, zero = &quot;—&quot;, small = 0.001, small_text = &quot;&lt; 0.001&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["7078d2cf"]=
+{
+  "Metric": ["HR", "p-value", "Events", "Rate"],
+  "Value": [0.62, 3e-04, 0, null]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Metric": ["HR", "p-value", "Events", "Rate"],
-    "Value": [0.62, 3e-04, 0, null]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -798,7 +767,8 @@ lt(d) |&gt;
       "small": 0.001,
       "small_text": "< 0.001"
     }
-  ]
+  ],
+  "data_key": "7078d2cf"
 }
 })</script>
 <h3 id="sec:infinity-values"><span class="section-number">3.5</span> Infinity values</h3>
@@ -810,19 +780,22 @@ lt(d) |&gt;
 )
 lt(d) |&gt; lt_format(~ Value, decimals = 2)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["11fa72ee"]=
+{
+  "Metric": ["Lower bound", "Upper bound", "Rate", "Missing"],
+  "Value": [-Infinity, Infinity, 1.5, null]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Metric": ["Lower bound", "Upper bound", "Rate", "Missing"],
-    "Value": [-Infinity, Infinity, 1.5, null]
-  },
   "ops": [
     {
       "type": "fmt_number",
       "columns": ["Value"],
       "decimals": 2
     }
-  ]
+  ],
+  "data_key": "11fa72ee"
 }
 })</script>
 <h2 id="sec:footnotes-and-notes"><span class="section-number main-number">4</span> Footnotes and notes</h2>
@@ -853,14 +826,16 @@ lt(d) |&gt;
   # specific body cells (column + rows)
   lt_footnote(&quot;SE undefined for counts.&quot;, &quot;body&quot;, &quot;SE&quot;, rows = c(1, 3))
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["0fa627b2"]=
+{
+  "Arm": ["Treatment", "Treatment", "Control", "Control"],
+  "Stat": ["n", "Mean", "n", "Mean"],
+  "Value": [31, 6.8, 30, 4.2],
+  "SE": [null, 0.42, null, 0.38]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Arm": ["Treatment", "Treatment", "Control", "Control"],
-    "Stat": ["n", "Mean", "n", "Mean"],
-    "Value": [31, 6.8, 30, 4.2],
-    "SE": [null, 0.42, null, 0.38]
-  },
   "row_group": ["Arm"],
   "header": {
     "title": "Study Results",
@@ -917,7 +892,8 @@ lt(d) |&gt;
         "rows": [1, 3]
       }
     }
-  ]
+  ],
+  "data_key": "0fa627b2"
 }
 })</script>
 <h3 id="sec:notes"><span class="section-number">4.2</span> Notes</h3>
@@ -926,22 +902,10 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  },
   "notes": [
     "Data from the 1974 Motor Trend US magazine."
-  ]
+  ],
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h2 id="sec:row-groups"><span class="section-number main-number">5</span> Row groups</h2>
@@ -959,13 +923,15 @@ lt(d) |&gt;
   lt_header(title = &quot;US Cities by Region&quot;) |&gt;
   lt_format(~ Population, big_mark = &quot;,&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["c5ae597b"]=
+{
+  "Region": ["East", "East", "West", "West", "West"],
+  "City": ["New York", "Boston", "Seattle", "Portland", "Denver"],
+  "Population": [8336817, 675647, 737015, 652503, 715522]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Region": ["East", "East", "West", "West", "West"],
-    "City": ["New York", "Boston", "Seattle", "Portland", "Denver"],
-    "Population": [8336817, 675647, 737015, 652503, 715522]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -976,7 +942,8 @@ lt(d) |&gt;
   "row_group": ["Region"],
   "header": {
     "title": "US Cities by Region"
-  }
+  },
+  "data_key": "c5ae597b"
 }
 })</script>
 <h3 id="sec:auto-separator-rows-for-long-labels"><span class="section-number">5.2</span> Auto separator rows for long labels</h3>
@@ -993,14 +960,17 @@ full-width separator rows when any group label exceeds 20 characters:</p>
 # &quot;Cardiovascular Research&quot; (23 chars) triggers separator mode automatically
 lt(d) |&gt; lt_group(~ Department)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["cef15236"]=
+{
+  "Department": ["Cardiovascular Research", "Cardiovascular Research", "Biostatistics", "Biostatistics"],
+  "Trial": ["ATLAS-2", "BEACON", "PRIME-1", "NEXUS"],
+  "N": [450, 320, 280, 510]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Department": ["Cardiovascular Research", "Cardiovascular Research", "Biostatistics", "Biostatistics"],
-    "Trial": ["ATLAS-2", "BEACON", "PRIME-1", "NEXUS"],
-    "N": [450, 320, 280, 510]
-  },
-  "row_group": ["Department"]
+  "row_group": ["Department"],
+  "data_key": "cef15236"
 }
 })</script>
 <pre><code class="language-r"># force rowspan mode with sep = FALSE
@@ -1008,13 +978,9 @@ lt(d) |&gt; lt_group(~ Department, sep = FALSE)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Department": ["Cardiovascular Research", "Cardiovascular Research", "Biostatistics", "Biostatistics"],
-    "Trial": ["ATLAS-2", "BEACON", "PRIME-1", "NEXUS"],
-    "N": [450, 320, 280, 510]
-  },
   "row_group": ["Department"],
-  "auto_sep": false
+  "auto_sep": false,
+  "data_key": "cef15236"
 }
 })</script>
 <h3 id="sec:group-by-multiple-columns-rowspan"><span class="section-number">5.3</span> Group by multiple columns (rowspan)</h3>
@@ -1031,14 +997,16 @@ lt(d) |&gt;
   lt_header(title = &quot;Cities by Region and State&quot;) |&gt;
   lt_format(~ Population, big_mark = &quot;,&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["ed0aa0fe"]=
+{
+  "Region": ["East", "East", "East", "West", "West", "West"],
+  "State": ["NY", "NY", "MA", "WA", "WA", "OR"],
+  "City": ["New York", "Buffalo", "Boston", "Seattle", "Spokane", "Portland"],
+  "Population": [8336817, 278349, 675647, 737015, 228989, 652503]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Region": ["East", "East", "East", "West", "West", "West"],
-    "State": ["NY", "NY", "MA", "WA", "WA", "OR"],
-    "City": ["New York", "Buffalo", "Boston", "Seattle", "Spokane", "Portland"],
-    "Population": [8336817, 278349, 675647, 737015, 228989, 652503]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1049,7 +1017,8 @@ lt(d) |&gt;
   "row_group": ["Region", "State"],
   "header": {
     "title": "Cities by Region and State"
-  }
+  },
+  "data_key": "ed0aa0fe"
 }
 })</script>
 <h3 id="sec:separator-row-style"><span class="section-number">5.4</span> Separator-row style</h3>
@@ -1067,11 +1036,6 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Region": ["East", "East", "West", "West", "West"],
-    "City": ["New York", "Boston", "Seattle", "Portland", "Denver"],
-    "Population": [8336817, 675647, 737015, 652503, 715522]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1082,7 +1046,8 @@ lt(d) |&gt;
   "row_group": "Region",
   "header": {
     "title": "US Cities by Region"
-  }
+  },
+  "data_key": "c5ae597b"
 }
 })</script>
 <h3 id="sec:manual-row-groups"><span class="section-number">5.5</span> Manual row groups</h3>
@@ -1092,19 +1057,6 @@ belong to each group:</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  },
   "ops": [
     {
       "type": "row_group",
@@ -1116,7 +1068,8 @@ belong to each group:</p>
       "label": "Last three",
       "rows": [4, 5, 6]
     }
-  ]
+  ],
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h3 id="sec:row-group-ordering"><span class="section-number">5.6</span> Row group ordering</h3>
@@ -1129,20 +1082,23 @@ lt(d) |&gt;
   lt_group(~ arm, sep = TRUE) |&gt;
   lt_group(&quot;Treatment&quot;, &quot;Placebo&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["98edba99"]=
+{
+  "arm": ["Placebo", "Placebo", "Treatment", "Treatment"],
+  "stat": ["n", "Mean", "n", "Mean"],
+  "value": ["30", "4.2", "31", "6.8"]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "arm": ["Placebo", "Placebo", "Treatment", "Treatment"],
-    "stat": ["n", "Mean", "n", "Mean"],
-    "value": ["30", "4.2", "31", "6.8"]
-  },
   "ops": [
     {
       "type": "group_order",
       "order": ["Treatment", "Placebo"]
     }
   ],
-  "row_group": "arm"
+  "row_group": "arm",
+  "data_key": "98edba99"
 }
 })</script>
 <h3 id="sec:row-indentation"><span class="section-number">5.7</span> Row indentation</h3>
@@ -1157,12 +1113,14 @@ lt(d) |&gt;
   lt_indent(c(2, 5), level = 1) |&gt;
   lt_indent(c(3, 4, 6), level = 2)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["e837c910"]=
+{
+  "label": ["Any AE", "SOC: Cardiac", "Tachycardia", "Bradycardia", "SOC: GI", "Nausea"],
+  "n_pct": ["45 (67%)", "30 (45%)", "15 (22%)", "18 (27%)", "20 (30%)", "12 (18%)"]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "label": ["Any AE", "SOC: Cardiac", "Tachycardia", "Bradycardia", "SOC: GI", "Nausea"],
-    "n_pct": ["45 (67%)", "30 (45%)", "15 (22%)", "18 (27%)", "20 (30%)", "12 (18%)"]
-  },
   "ops": [
     {
       "type": "indent",
@@ -1178,7 +1136,8 @@ lt(d) |&gt;
   "header": {
     "title": "Adverse Events",
     "subtitle": "Safety Population"
-  }
+  },
+  "data_key": "e837c910"
 }
 })</script>
 <h2 id="sec:column-structure"><span class="section-number main-number">6</span> Column structure</h2>
@@ -1190,13 +1149,6 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "spanners": [
     {
       "label": "Sepal",
@@ -1206,7 +1158,8 @@ lt(d) |&gt;
       "label": "Petal",
       "columns": ["Petal.Length", "Petal.Width"]
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h4 id="sec:auto-inferred-spanners"><span class="section-number">6.1.1</span> Auto-inferred spanners</h4>
@@ -1216,14 +1169,8 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
-  "auto_span": true
+  "auto_span": true,
+  "data_key": "e81b2918"
 }
 })</script>
 <h4 id="sec:spanner-with-formatting"><span class="section-number">6.1.2</span> Spanner with formatting</h4>
@@ -1235,13 +1182,6 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1261,7 +1201,8 @@ lt(d) |&gt;
       "label": "Petal",
       "columns": ["Petal.Length", "Petal.Width"]
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h3 id="sec:column-merging"><span class="section-number">6.2</span> Column merging</h3>
@@ -1277,13 +1218,15 @@ lt(d) |&gt;
   lt_merge(~ n + pct, pattern = &quot;{1} ({2}%)&quot;) |&gt;
   lt_label(n = &quot;n (%)&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["45aac8bb"]=
+{
+  "stat": ["Age", "Weight", "Height"],
+  "n": [67, 65, 64],
+  "pct": [100, 97, 95.5]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "stat": ["Age", "Weight", "Height"],
-    "n": [67, 65, 64],
-    "pct": [100, 97, 95.5]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1302,7 +1245,8 @@ lt(d) |&gt;
         "n": "n (%)"
       }
     }
-  ]
+  ],
+  "data_key": "45aac8bb"
 }
 })</script>
 <h4 id="sec:conditional-merge-with-lt-lt-gt-gt"><span class="section-number">6.2.1</span> Conditional merge with <code>&lt;&lt; &gt;&gt;</code></h4>
@@ -1319,14 +1263,16 @@ lt(d) |&gt;
   lt_merge(~ est + ci_lo + ci_hi, pattern = &quot;{1}&lt;&lt; ({2}, {3})&gt;&gt;&quot;) |&gt;
   lt_label(est = &quot;Estimate (95% CI)&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["199bda14"]=
+{
+  "endpoint": ["Primary", "Secondary", "Tertiary"],
+  "est": [0.61, 0.79, 0.45],
+  "ci_lo": [0.4, 0.57, null],
+  "ci_hi": [0.82, 1.01, null]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "endpoint": ["Primary", "Secondary", "Tertiary"],
-    "est": [0.61, 0.79, 0.45],
-    "ci_lo": [0.4, 0.57, null],
-    "ci_hi": [0.82, 1.01, null]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1345,7 +1291,8 @@ lt(d) |&gt;
         "est": "Estimate (95% CI)"
       }
     }
-  ]
+  ],
+  "data_key": "199bda14"
 }
 })</script>
 <h3 id="sec:column-widths"><span class="section-number">6.3</span> Column widths</h3>
@@ -1353,19 +1300,6 @@ lt(d) |&gt;
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "disp": [160, 160, 108, 258, 360, 225],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "drat": [3.9, 3.9, 3.85, 3.08, 3.15, 2.76],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "qsec": [16.46, 17.02, 18.61, 19.44, 17.02, 20.22],
-    "vs": [0, 0, 1, 1, 0, 1],
-    "am": [1, 1, 1, 0, 0, 0],
-    "gear": [4, 4, 4, 3, 3, 3],
-    "carb": [4, 4, 1, 1, 2, 1]
-  },
   "ops": [
     {
       "type": "width",
@@ -1376,7 +1310,8 @@ lt(d) |&gt;
         "hp": "6em"
       }
     }
-  ]
+  ],
+  "data_key": "8a8e7bff"
 }
 })</script>
 <h3 id="sec:table-width"><span class="section-number">6.4</span> Table width</h3>
@@ -1386,32 +1321,19 @@ whole table. It can be combined with named column widths:</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "width",
       "table": "80%"
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <pre><code class="language-r">tbl_iris |&gt; lt_width(&quot;100%&quot;, Species = &quot;20em&quot;)
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "width",
@@ -1420,7 +1342,8 @@ whole table. It can be combined with named column widths:</p>
       },
       "table": "100%"
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h3 id="sec:column-reordering"><span class="section-number">6.5</span> Column reordering</h3>
@@ -1428,19 +1351,13 @@ whole table. It can be combined with named column widths:</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "move",
       "columns": ["Petal.Length", "Petal.Width"]
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h3 id="sec:hiding-columns"><span class="section-number">6.6</span> Hiding columns</h3>
@@ -1451,19 +1368,13 @@ reads the whole row (e.g. an interactive table’s row detail, below).</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Sepal.Length": [5.1, 4.9, 4.7, 4.6, 5, 5.4],
-    "Sepal.Width": [3.5, 3, 3.2, 3.1, 3.6, 3.9],
-    "Petal.Length": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7],
-    "Petal.Width": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-    "Species": ["setosa", "setosa", "setosa", "setosa", "setosa", "setosa"]
-  },
   "ops": [
     {
       "type": "hide",
       "columns": ["Petal.Length", "Petal.Width"]
     }
-  ]
+  ],
+  "data_key": "e81b2918"
 }
 })</script>
 <h2 id="sec:inline-plots"><span class="section-number main-number">7</span> Inline plots</h2>
@@ -1491,14 +1402,16 @@ each cell.</p>
 lt(d_eff) |&gt;
   lt_errorbar(Est ~ Lo + Hi, ref = 0, axis = &quot;Effect (95% CI)&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["8093220d"]=
+{
+  "Term": ["Age", "Dose", "Baseline", "Sex"],
+  "Est": [0.12, -0.34, 0.45, -0.08],
+  "Lo": [-0.05, -0.52, 0.21, -0.29],
+  "Hi": [0.29, -0.16, 0.69, 0.13]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Term": ["Age", "Dose", "Baseline", "Sex"],
-    "Est": [0.12, -0.34, 0.45, -0.08],
-    "Lo": [-0.05, -0.52, 0.21, -0.29],
-    "Hi": [0.29, -0.16, 0.69, 0.13]
-  },
   "ops": [
     {
       "type": "hide",
@@ -1517,7 +1430,8 @@ lt(d_eff) |&gt;
       "axis": true,
       "axis_label": "Effect (95% CI)"
     }
-  ]
+  ],
+  "data_key": "8093220d"
 }
 })</script>
 <p>By default the plot is drawn into the first value column’s cells. Pass <code>into</code>
@@ -1530,12 +1444,6 @@ use <code>lt_move()</code> to place it.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Term": ["Age", "Dose", "Baseline", "Sex"],
-    "Est": [0.12, -0.34, 0.45, -0.08],
-    "Lo": [-0.05, -0.52, 0.21, -0.29],
-    "Hi": [0.29, -0.16, 0.69, 0.13]
-  },
   "ops": [
     {
       "type": "add_col",
@@ -1555,7 +1463,8 @@ use <code>lt_move()</code> to place it.</p>
       "axis": true,
       "axis_label": "Effect (95% CI)"
     }
-  ]
+  ],
+  "data_key": "8093220d"
 }
 })</script>
 <p>Several series can share one cell: pass one <code>value ~ lower + upper</code> per series
@@ -1573,17 +1482,19 @@ lt(d_grp) |&gt;
     labels = c(&quot;Drug A&quot;, &quot;Drug B&quot;), axis = &quot;Risk difference (%)&quot;
   )
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["aadd21be"]=
+{
+  "Term": ["Headache", "Nausea", "Fatigue"],
+  "D1": [2.1, -1.4, 3.3],
+  "L1": [-1, -4.2, 0.1],
+  "U1": [5.2, 1.4, 6.5],
+  "D2": [-0.5, 0.8, 1.2],
+  "L2": [-3.6, -2.1, -1.9],
+  "U2": [2.6, 3.7, 4.3]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Term": ["Headache", "Nausea", "Fatigue"],
-    "D1": [2.1, -1.4, 3.3],
-    "L1": [-1, -4.2, 0.1],
-    "U1": [5.2, 1.4, 6.5],
-    "D2": [-0.5, 0.8, 1.2],
-    "L2": [-3.6, -2.1, -1.9],
-    "U2": [2.6, 3.7, 4.3]
-  },
   "ops": [
     {
       "type": "hide",
@@ -1610,7 +1521,8 @@ lt(d_grp) |&gt;
       "axis": true,
       "axis_label": "Risk difference (%)"
     }
-  ]
+  ],
+  "data_key": "aadd21be"
 }
 })</script>
 <h3 id="sec:sparklines"><span class="section-number">7.2</span> Sparklines</h3>
@@ -1631,21 +1543,23 @@ lt(d_spark) |&gt;
   lt_sparkline(~ Temp) |&gt;
   lt_sparkline(~ Rain, type = &quot;bar&quot;, color = &quot;#4caf50&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["b93ca66d"]=
+{
+  "City": ["Oslo", "Cairo", "Lima"],
+  "Temp": [
+    [-3, -2, 1, 6, 12, 16],
+    [14, 15, 18, 23, 28, 31],
+    [19, 19, 18, 16, 15, 15]
+  ],
+  "Rain": [
+    [49, 36, 47, 41, 53, 60],
+    [5, 4, 4, 1, 0, 0],
+    [8, 4, 2, 1, 1, 1]
+  ]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "City": ["Oslo", "Cairo", "Lima"],
-    "Temp": [
-      [-3, -2, 1, 6, 12, 16],
-      [14, 15, 18, 23, 28, 31],
-      [19, 19, 18, 16, 15, 15]
-    ],
-    "Rain": [
-      [49, 36, 47, 41, 53, 60],
-      [5, 4, 4, 1, 0, 0],
-      [8, 4, 2, 1, 1, 1]
-    ]
-  },
   "ops": [
     {
       "type": "sparkline",
@@ -1662,7 +1576,8 @@ lt(d_spark) |&gt;
       "width": 120,
       "height": 20
     }
-  ]
+  ],
+  "data_key": "b93ca66d"
 }
 })</script>
 <h3 id="sec:dot-plots"><span class="section-number">7.3</span> Dot plots</h3>
@@ -1680,13 +1595,15 @@ drop it, or a string for a caption).</p>
 lt(d_dot) |&gt;
   lt_dotplot(~ Before + After, color = TRUE, axis = &quot;Score&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["314299db"]=
+{
+  "Group": ["Control", "Low", "High"],
+  "Before": [3.1, 3.4, 3],
+  "After": [3.3, 4.1, 5.2]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Group": ["Control", "Low", "High"],
-    "Before": [3.1, 3.4, 3],
-    "After": [3.3, 4.1, 5.2]
-  },
   "ops": [
     {
       "type": "hide",
@@ -1710,7 +1627,8 @@ lt(d_dot) |&gt;
       "axis": true,
       "axis_label": "Score"
     }
-  ]
+  ],
+  "data_key": "314299db"
 }
 })</script>
 <p>When two dots fall at nearly the same value they overlap; <code>stagger = TRUE</code>
@@ -1720,11 +1638,6 @@ spreads near-equal dots onto separate tracks so each stays visible.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Group": ["Control", "Low", "High"],
-    "Before": [3.1, 3.4, 3],
-    "After": [3.3, 4.1, 5.2]
-  },
   "ops": [
     {
       "type": "hide",
@@ -1749,7 +1662,8 @@ spreads near-equal dots onto separate tracks so each stays visible.</p>
       "axis": true,
       "axis_label": "Score"
     }
-  ]
+  ],
+  "data_key": "314299db"
 }
 })</script>
 <h2 id="sec:styling"><span class="section-number main-number">8</span> Styling</h2>
@@ -1767,13 +1681,15 @@ lt(d) |&gt;
   lt_style(&quot;P&quot;, rows = 1:2L, bold = TRUE, color = &quot;#06c&quot;) |&gt;
   lt_style(&quot;HR&quot;, rows = 1L, bg = &quot;#e8f4e8&quot;, borderBottom = &quot;2px solid #4a4&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["b2c2082f"]=
+{
+  "Endpoint": ["Primary", "Secondary", "Exploratory"],
+  "HR": [0.62, 0.79, 0.91],
+  "P": [0.001, 0.042, 0.38]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Endpoint": ["Primary", "Secondary", "Exploratory"],
-    "HR": [0.62, 0.79, 0.91],
-    "P": [0.001, 0.042, 0.38]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1797,7 +1713,8 @@ lt(d) |&gt;
       "rows": [1],
       "css": "background:#e8f4e8;border-bottom:2px solid #4a4"
     }
-  ]
+  ],
+  "data_key": "b2c2082f"
 }
 })</script>
 <h3 id="sec:conditional-styling"><span class="section-number">8.2</span> Conditional styling</h3>
@@ -1818,13 +1735,15 @@ lt(d) |&gt;
   .good { color: green; }
   .sig { font-weight: bold; }
 }</style>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["40857e65"]=
+{
+  "Endpoint": ["Primary", "Secondary", "Exploratory"],
+  "HR": [0.62, 0.79, 1.05],
+  "P": [0.001, 0.042, 0.38]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Endpoint": ["Primary", "Secondary", "Exploratory"],
-    "HR": [0.62, 0.79, 1.05],
-    "P": [0.001, 0.042, 0.38]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -1843,7 +1762,8 @@ lt(d) |&gt;
       "test": v => v < 0.05,
       "class": "sig"
     }
-  ]
+  ],
+  "data_key": "40857e65"
 }
 })</script>
 <h3 id="sec:highlighting-na-cells"><span class="section-number">8.3</span> Highlighting NA cells</h3>
@@ -1859,20 +1779,23 @@ lt(d) |&gt;
 <style>.lt-table {
   .na { background: #fee; }
 }</style>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["fc715ae8"]=
+{
+  "arm": ["Treatment", "Control", "Treatment"],
+  "n": [30, null, 28],
+  "response": [0.67, null, null]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "arm": ["Treatment", "Control", "Treatment"],
-    "n": [30, null, 28],
-    "response": [0.67, null, null]
-  },
   "ops": [
     {
       "type": "style",
       "test": v => v == null,
       "class": "na"
     }
-  ]
+  ],
+  "data_key": "fc715ae8"
 }
 })</script>
 <h3 id="sec:scoping-styles-to-one-table"><span class="section-number">8.4</span> Scoping styles to one table</h3>
@@ -1883,24 +1806,27 @@ the container is tagged <code>striped</code>, and a rule keyed on <code>.striped
 only this table.</p>
 <pre><code class="language-r">lt(head(mtcars, 4)) |&gt; lt_wrap(class = &quot;striped&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["7448221f"]=
+{
+  "mpg": [21, 21, 22.8, 21.4],
+  "cyl": [6, 6, 4, 6],
+  "disp": [160, 160, 108, 258],
+  "hp": [110, 110, 93, 110],
+  "drat": [3.9, 3.9, 3.85, 3.08],
+  "wt": [2.62, 2.875, 2.32, 3.215],
+  "qsec": [16.46, 17.02, 18.61, 19.44],
+  "vs": [0, 0, 1, 1],
+  "am": [1, 1, 1, 0],
+  "gear": [4, 4, 4, 3],
+  "carb": [4, 4, 1, 1]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4],
-    "cyl": [6, 6, 4, 6],
-    "disp": [160, 160, 108, 258],
-    "hp": [110, 110, 93, 110],
-    "drat": [3.9, 3.9, 3.85, 3.08],
-    "wt": [2.62, 2.875, 2.32, 3.215],
-    "qsec": [16.46, 17.02, 18.61, 19.44],
-    "vs": [0, 0, 1, 1],
-    "am": [1, 1, 1, 0],
-    "gear": [4, 4, 4, 3],
-    "carb": [4, 4, 1, 1]
-  },
   "wrap": {
     "class": "striped"
-  }
+  },
+  "data_key": "7448221f"
 }
 })</script>
 <pre><code class="language-css">.striped tbody tr:nth-child(even) td { background: #f2f6ff; }
@@ -1927,12 +1853,14 @@ lt(d) |&gt;
   lt_label(Package = I(&quot;Name&lt;sup&gt;*&lt;/sup&gt;&quot;)) |&gt;
   lt_note(I(&quot;See &lt;a href='https://yihui.org/'&gt;the author&lt;/a&gt;.&quot;))
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["b97272eb"]=
+{
+  "Package": ["<a href='https://cran.r-project.org/package=lt'>lt</a>", "<a href='https://cran.r-project.org/package=xfun'>xfun</a>"],
+  "Status": ["<b style='color:#090'>stable</b>", "<i>active</i>"]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Package": ["<a href='https://cran.r-project.org/package=lt'>lt</a>", "<a href='https://cran.r-project.org/package=xfun'>xfun</a>"],
-    "Status": ["<b style='color:#090'>stable</b>", "<i>active</i>"]
-  },
   "ops": [
     {
       "type": "label",
@@ -1947,7 +1875,8 @@ lt(d) |&gt;
   },
   "notes": [
     ["See <a href='https://yihui.org/'>the author</a>."]
-  ]
+  ],
+  "data_key": "b97272eb"
 }
 })</script>
 <h2 id="sec:complete-example"><span class="section-number main-number">9</span> Complete example</h2>
@@ -1970,16 +1899,18 @@ lt(d) |&gt;
   lt_format(~ P_Value, decimals = 4) |&gt;
   lt_footnote(&quot;Two-sided p-value from log-rank test.&quot;, &quot;column&quot;, &quot;P_Value&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["6d12960e"]=
+{
+  "Group": ["Treatment", "Treatment", "Control", "Control"],
+  "Endpoint": ["Primary", "Secondary", "Primary", "Secondary"],
+  "Estimate": [0.6123, 0.7891, 0.4567, 0.5432],
+  "CI_Lower": [0.4012, 0.5678, 0.2345, 0.321],
+  "CI_Upper": [0.8234, 1.0104, 0.6789, 0.7654],
+  "P_Value": [0.0012, 0.0456, 0.1234, 0.2345]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Group": ["Treatment", "Treatment", "Control", "Control"],
-    "Endpoint": ["Primary", "Secondary", "Primary", "Secondary"],
-    "Estimate": [0.6123, 0.7891, 0.4567, 0.5432],
-    "CI_Lower": [0.4012, 0.5678, 0.2345, 0.321],
-    "CI_Upper": [0.8234, 1.0104, 0.6789, 0.7654],
-    "P_Value": [0.0012, 0.0456, 0.1234, 0.2345]
-  },
   "ops": [
     {
       "type": "fmt_number",
@@ -2011,7 +1942,8 @@ lt(d) |&gt;
         "columns": ["P_Value"]
       }
     }
-  ]
+  ],
+  "data_key": "6d12960e"
 }
 })</script>
 <h2 id="sec:exporting"><span class="section-number main-number">10</span> Exporting</h2>
@@ -2139,24 +2071,27 @@ first of which is used initially.</p>
 <pre><code class="language-r">d = mtcars[, c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;hp&quot;, &quot;wt&quot;, &quot;gear&quot;)]
 lt(d) |&gt; lt_interactive(pager = c(5, 10, Inf))
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/css/lt-interactive.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/lt-interactive.min.css">
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["3d00d273"]=
+{
+  "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
+  "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
+  "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
+  "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
+  "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "interactive": {
     "sort": true,
     "search": true,
     "pager": [5, 10, 0]
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/lt-interactive.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/lt-interactive.min.js" defer></script>
 <p>Shift-click a second header to sort by it as a tie-breaker, so several
 columns sort at once (an ordinal in each header marks its place). An
 initial sort can be requested with <code>sort</code> as a one-sided formula (below);
@@ -2165,18 +2100,12 @@ a <code>-</code> prefix (a negated formula term) sorts a column descending.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "interactive": {
     "sort": ["cyl", "-mpg"],
     "search": false,
     "pager": [10]
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <p>The extra controls (and the JavaScript that drives them) are only loaded
@@ -2194,13 +2123,6 @@ only.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "interactive": {
     "sort": true,
     "search": false,
@@ -2208,7 +2130,8 @@ only.</p>
       "default": true
     },
     "pager": [5]
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <p>A column can take a <em>typed</em> control instead of a plain box: pass a named
@@ -2241,13 +2164,6 @@ control. Here <code>mpg</code> is hidden yet still filterable through its chip.<
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "ops": [
     {
       "type": "hide",
@@ -2275,7 +2191,8 @@ control. Here <code>mpg</code> is hidden yet still filterable through its chip.<
       }
     },
     "pager": [5]
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <h3 id="sec:row-detail-drill-down"><span class="section-number">11.3</span> Row detail (drill-down)</h3>
@@ -2292,13 +2209,6 @@ the detail.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "ops": [
     {
       "type": "hide",
@@ -2310,7 +2220,8 @@ the detail.</p>
     "search": true,
     "pager": [5],
     "detail": ["hp", "wt"]
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <p>For full control, pass a JavaScript callback yourself, wrapped in <code>js()</code>.
@@ -2330,13 +2241,6 @@ interactive, as below where it is made sortable.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "ops": [
     {
       "type": "hide",
@@ -2351,7 +2255,8 @@ interactive, as below where it is made sortable.</p>
       data: { field: ["row", "hp", "wt"], value: [i, d.hp, d.wt] },
       interactive: { sort: ["value"], search: false }
     })
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <h3 id="sec:resizable-columns"><span class="section-number">11.4</span> Resizable columns</h3>
@@ -2362,15 +2267,17 @@ as they are. Initial widths come from <code>lt_width()</code> as usual.</p>
 <pre><code class="language-r">lt(head(d)) |&gt; lt_interactive(resize = TRUE, pager = FALSE, search = FALSE) |&gt;
   lt_width(mpg = &quot;8em&quot;)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["fad86efa"]=
+{
+  "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
+  "cyl": [6, 6, 4, 6, 8, 6],
+  "hp": [110, 110, 93, 110, 175, 105],
+  "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
+  "gear": [4, 4, 4, 3, 3, 3]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1],
-    "cyl": [6, 6, 4, 6, 8, 6],
-    "hp": [110, 110, 93, 110, 175, 105],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46],
-    "gear": [4, 4, 4, 3, 3, 3]
-  },
   "ops": [
     {
       "type": "width",
@@ -2383,7 +2290,8 @@ as they are. Initial widths come from <code>lt_width()</code> as usual.</p>
     "sort": true,
     "search": false,
     "resize": true
-  }
+  },
+  "data_key": "fad86efa"
 }
 })</script>
 <h3 id="sec:column-visibility"><span class="section-number">11.5</span> Column visibility</h3>
@@ -2397,13 +2305,6 @@ them back). The checklist shows each column’s displayed label.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "interactive": {
     "sort": true,
     "search": true,
@@ -2411,7 +2312,8 @@ them back). The checklist shows each column’s displayed label.</p>
     "hide": {
       "hidden": ["hp", "wt"]
     }
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <h3 id="sec:downloading-a-csv"><span class="section-number">11.6</span> Downloading a CSV</h3>
@@ -2425,13 +2327,6 @@ file holds exactly what the table shows.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "mpg": [21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4],
-    "cyl": [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4],
-    "hp": [110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109],
-    "wt": [2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78],
-    "gear": [4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4]
-  },
   "interactive": {
     "sort": true,
     "search": true,
@@ -2440,7 +2335,8 @@ file holds exactly what the table shows.</p>
     },
     "pager": [5],
     "download": "cars.csv"
-  }
+  },
+  "data_key": "3d00d273"
 }
 })</script>
 <h3 id="sec:row-groups-and-indentation"><span class="section-number">11.7</span> Row groups and indentation</h3>
@@ -2458,19 +2354,22 @@ its header at the top of the next page.</p>
 )
 lt(d2) |&gt; lt_group(~ Region, sep = TRUE) |&gt; lt_interactive(pager = 5)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["4db12ebf"]=
+{
+  "Region": ["East", "East", "East", "West", "West", "West", "South", "South", "South"],
+  "City": ["NYC", "Boston", "Philly", "LA", "Reno", "Boise", "Austin", "Miami", "Atlanta"],
+  "Sales": [42, 17, 23, 55, 9, 14, 31, 48, 26]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Region": ["East", "East", "East", "West", "West", "West", "South", "South", "South"],
-    "City": ["NYC", "Boston", "Philly", "LA", "Reno", "Boise", "Austin", "Miami", "Atlanta"],
-    "Sales": [42, 17, 23, 55, 9, 14, 31, 48, 26]
-  },
   "row_group": "Region",
   "interactive": {
     "sort": true,
     "search": true,
     "pager": [5]
-  }
+  },
+  "data_key": "4db12ebf"
 }
 })</script>
 <p>Rowspan row groups (the default <code>lt_group()</code> rendering) sort and filter
@@ -2482,17 +2381,13 @@ to match.</p>
 </code></pre>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Region": ["East", "East", "East", "West", "West", "West", "South", "South", "South"],
-    "City": ["NYC", "Boston", "Philly", "LA", "Reno", "Boise", "Austin", "Miami", "Atlanta"],
-    "Sales": [42, 17, 23, 55, 9, 14, 31, 48, 26]
-  },
   "row_group": ["Region"],
   "interactive": {
     "sort": true,
     "search": true,
     "pager": [5]
-  }
+  },
+  "data_key": "4db12ebf"
 }
 })</script>
 <p>Indentation sorts siblings under each parent, carrying each subtree
@@ -2503,12 +2398,14 @@ along; filtering a descendant keeps its ancestors visible for context.</p>
 )
 lt(d3) |&gt; lt_indent(c(2, 3, 4, 6, 7, 8), level = 1) |&gt; lt_interactive(pager = 5)
 </code></pre>
+<script>((window.LT=window.LT||{}).d=window.LT.d||{})["b81b23e5"]=
+{
+  "Item": ["Fruit", "Apple", "Pear", "Berry", "Grain", "Rice", "Oat", "Wheat"],
+  "Qty": [0, 12, 7, 5, 0, 30, 8, 19]
+}
+</script>
 <script>((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
-  "data": {
-    "Item": ["Fruit", "Apple", "Pear", "Berry", "Grain", "Rice", "Oat", "Wheat"],
-    "Qty": [0, 12, 7, 5, 0, 30, 8, 19]
-  },
   "ops": [
     {
       "type": "indent",
@@ -2520,7 +2417,8 @@ lt(d3) |&gt; lt_indent(c(2, 3, 4, 6, 7, 8), level = 1) |&gt; lt_interactive(page
     "sort": true,
     "search": true,
     "pager": [5]
-  }
+  },
+  "data_key": "b81b23e5"
 }
 })</script>
 <p>Column spanners, styles, and footnotes are no obstacle to interactivity.</p>
@@ -2556,15 +2454,15 @@ shinyApp(ui, server)
 </div>
 <footer><div class="flex-col">
 <p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
-<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.8</p>
+<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.10</p>
 </div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/sidenotes.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/appendix.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/toc-highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/copy-button.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/heading-anchor.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/pages.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.113/js/key-buttons.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/sidenotes.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/appendix.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/toc-highlight.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/copy-button.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/heading-anchor.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/pages.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/key-buttons.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
