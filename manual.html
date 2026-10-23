@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="generator" content="litedown 0.11.10">
 <title>Help pages</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/default.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/article.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/copy-button.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/heading-anchor.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/pages.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/site.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/prism-xcode.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/article.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/copy-button.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/heading-anchor.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/pages.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/site.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/prism-xcode.min.css">
 </head>
 <body>
 <nav><p><a href="index.html">Home</a>
@@ -186,7 +186,7 @@ format(tbl, fragment = FALSE, inline_assets = FALSE)
 <pre><code>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;lt&lt;/title&gt;
 &lt;style&gt;body{font-family:system-ui,sans-serif;padding:1em}&lt;/style&gt;&lt;/head&gt;
 &lt;body&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/lt.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/lt.min.css&quot;&gt;
 &lt;script&gt;((window.LT=window.LT||{}).q=window.LT.q||[]).push({s:document.currentScript,d:
 {
   &quot;data&quot;: {
@@ -204,7 +204,7 @@ format(tbl, fragment = FALSE, inline_assets = FALSE)
   }
 }
 })&lt;/script&gt;
-&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/lt.min.js&quot; defer&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/lt.min.js&quot; defer&gt;&lt;/script&gt;
 &lt;/body&gt;&lt;/html&gt;
 </code></pre>
 <h2 id="sec:man-lt"><span class="section-number main-number">3</span> Create a table specification</h2>
@@ -868,7 +868,7 @@ HTML but cannot run JavaScript (e.g., GitHub Flavored Markdown).
 f1 = tempfile(fileext = '.html')
 lt_export(tbl, f1, method = 'raw')  # file output
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpzz7kd1/filed4740737e2b.html&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpsDIm0T/file12151e4bdb56.html&quot;
 </code></pre>
 <pre><code class="language-r"># Bake a static &lt;table&gt; (needs Node.js or a headless browser).
 if (lt:::can_bake())
@@ -982,7 +982,7 @@ if (lt:::has_browser(pdf = TRUE)) {
   lt_export(tbl, f3, width = 400)
 }
 </code></pre>
-<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//Rtmpzz7kd1/filed473c1af13a.png&quot;
+<pre><code>#&gt; [1] &quot;/var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/T//RtmpsDIm0T/file1215470911c3.png&quot;
 </code></pre>
 <pre><code class="language-r">unlink(c(f1, f2, f3))
 </code></pre>
@@ -1396,13 +1396,16 @@ widths can be set with <code><a href="#sec:man-lt-width">lt_width()</a></code>.<
 </td></tr>
 <tr><td><code>hide</code></td>
 <td>
-<p>Column-visibility control: an eye button at the start of the
-search row opens a checklist of every column, where unchecking a column
+<p>Column-visibility control: an eye button in the
+control bar opens a checklist of every column, where unchecking a column
 hides it (header and cells) and re-checking restores it. <code>TRUE</code> adds the
 menu with all columns shown; column names (a character vector or a one-sided
 formula, e.g. <code>~ x + y</code>) adds it with those columns hidden to begin with
-(every column is still listed, so any can be toggled). <code>NULL</code> (the default)
-adds no menu.</p>
+(every column is still listed, so any can be toggled). To label the button
+instead of showing the eye icon, use a list with <code>label</code> (a string, shown as
+a chip in the control bar) and optionally <code>columns</code> (the
+columns hidden to begin with), e.g. <code>list(label = "Show/Hide columns")</code>.
+<code>NULL</code> (the default) adds no menu.</p>
 </td></tr>
 <tr><td><code>detail</code></td>
 <td>
@@ -1458,6 +1461,8 @@ lt(head(mtcars)) |&gt; lt_interactive(resize = TRUE)
 # a column-visibility menu (all columns shown, or with some hidden to start)
 lt(head(mtcars)) |&gt; lt_interactive(hide = TRUE)
 lt(head(mtcars)) |&gt; lt_interactive(hide = ~ hp + drat)
+# a labeled button instead of the eye icon
+lt(head(mtcars)) |&gt; lt_interactive(hide = list(label = 'Show/Hide columns'))
 # an initial sort by cyl, then mpg descending within each
 lt(mtcars) |&gt; lt_interactive(sort = ~ cyl + -mpg)
 # expandable row detail (drill-down): name the columns to show. Here gear and
@@ -2101,18 +2106,18 @@ print(x, ...)</code></pre>
 <h3 id="sec:examples_30" class="unnumbered unlisted">Examples</h3>
 <pre><code class="language-r">print(lt(head(mtcars)))
 </code></pre>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/css/manual.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/css/manual.min.css">
 </div>
 <footer><div class="flex-col">
 <p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
 <p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.10</p>
 </div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/sidenotes.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/appendix.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/toc-highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/copy-button.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/heading-anchor.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.115/js/pages.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/sidenotes.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/appendix.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/toc-highlight.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/copy-button.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/heading-anchor.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.116/js/pages.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
