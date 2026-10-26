@@ -1,6 +1,6 @@
 # CHANGES IN lt VERSION 0.6
 
-- Added `view_lt()` to open a data frame or existing lt table as an interactive HTML page in the default browser, with column filters enabled by default, `lt_interactive()` options, and an optional saved output path.
+- Added `view_lt()` to open a data frame or existing lt table in the default browser, with column filters enabled by default and other `lt_interactive()` options. The local HTTP preview can also be opened by editors and AI tools: `open = FALSE` prints its URL, and non-interactive sessions keep serving until interrupted. `serve = FALSE` opens the saved HTML file directly.
 
 - `lt_export(width = )` also accepts a CSS width string, e.g., `"min-content"` for the narrowest width that shows every column.
 
