@@ -7,6 +7,7 @@
 view_lt(
   data,
   ...,
+  filter = TRUE,
   file = tempfile("lt-view-", fileext = ".html"),
   browser = getOption("browser")
 )
@@ -14,8 +15,11 @@ view_lt(
 \arguments{
 \item{data}{A data frame or an existing \code{lt_tbl}.}
 
-\item{...}{Arguments passed to \code{\link[=lt_interactive]{lt_interactive()}}, such as \code{filter},
-\code{pager}, \code{resize}, and \code{hide}.}
+\item{...}{Arguments passed to \code{\link[=lt_interactive]{lt_interactive()}}, such as \code{pager},
+\code{resize}, and \code{hide}.}
+
+\item{filter}{Per-column filters, passed to \code{\link[=lt_interactive]{lt_interactive()}}. Defaults
+to \code{TRUE} to show a filter under each column. Use \code{FALSE} to disable them.}
 
 \item{file}{An HTML output path. By default, a temporary file is used;
 supply a path to keep the page.}
@@ -30,10 +34,11 @@ The absolute HTML file path, invisibly.
 Convert a data frame to an \code{\link[=lt]{lt()}} table, enable \code{\link[=lt_interactive]{lt_interactive()}} controls,
 and open an HTML file in the default browser. An existing
 \code{lt_tbl} keeps its formatting and other table operations. Its existing
-interactive settings are kept when \code{...} is empty; otherwise \code{...} configures
-the controls. Browser zoom can be used to change the displayed font size.
+interactive settings are kept when \code{...} is empty and \code{filter} is not
+supplied; otherwise these arguments configure the controls. Browser zoom
+can be used to change the displayed font size.
 }
 \examples{
 # Opens the browser when run interactively:
-if (interactive()) view_lt(mtcars, filter = TRUE, pager = FALSE)
+if (interactive()) view_lt(mtcars, pager = FALSE)
 }
