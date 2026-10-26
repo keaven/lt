@@ -1,5 +1,7 @@
 # CHANGES IN lt VERSION 0.6
 
+- Added `view_lt()` to open a data frame or existing lt table as an interactive HTML page in the default browser, with `lt_interactive()` options and an optional saved output path.
+
 - `lt_export(width = )` also accepts a CSS width string, e.g., `"min-content"` for the narrowest width that shows every column.
 
 - `lt_interactive(hide = list(label = ))` shows the column-visibility menu as a labeled chip in the control bar instead of the eye icon.
